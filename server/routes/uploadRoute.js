@@ -3,10 +3,7 @@ const { uploadImageController } = require("../controller/uploadController");
 
 const router = express.Router();
 
-
-// UPLOAD A IMAGES || POST
-router.post("/upload-image",uploadImageController)
-
-
+// UPLOAD AN IMAGE || POST
+router.post("/upload-image", uploadImageController);
 
 module.exports = router;

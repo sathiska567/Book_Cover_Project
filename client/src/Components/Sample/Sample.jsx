@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import axios from "axios"
 
 export default function Sample() {
   const [file,setFile] = useState();
 
 // handle the file upload
 const handleUpload = async()=>{
-  console.log(file);
+
+
 }
 
   return (
