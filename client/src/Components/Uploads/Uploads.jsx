@@ -23,7 +23,7 @@ const Uploads = () => {
   const [videoPreviewOpen, setVideoPreviewOpen] = useState(false);
   const [videoPreviewTitle, setVideoPreviewTitle] = useState("");
   const [videoPreviewImage, setVideoPreviewImage] = useState("");
-
+  const videoRef = React.useRef(null);
 
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
@@ -53,12 +53,15 @@ const handleVideoPreview = async (file) => {
     file.preview = await getBase64(file.originFileObj);
   }
 
+
   setVideoPreviewImage(file.url || file.preview);
   setVideoPreviewOpen(true);
   setVideoPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
 };
-
   const handleVideoCancel = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
     setVideoPreviewOpen(false);
   };
 
@@ -108,11 +111,11 @@ const handleVideoPreview = async (file) => {
           {/* Submit button */}
           <Form.Item>
             <hr />
-            <Form.Item 
-            style={{marginTop: "20px"}}
-            label="Upload Videos for Gallery">
+            <Form.Item
+              style={{ marginTop: "20px" }}
+              label="Upload Videos for Gallery"
+            >
               <Upload
-              
                 listType="video"
                 fileList={videoFileList}
                 onPreview={handleVideoPreview}
@@ -128,6 +131,7 @@ const handleVideoPreview = async (file) => {
               onCancel={handleVideoCancel}
             >
               <video
+                ref={videoRef}
                 controls
                 style={{ width: "100%" }}
                 src={videoPreviewImage}
