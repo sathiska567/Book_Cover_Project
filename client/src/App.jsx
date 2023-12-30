@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/comments" element={<Comments />} />
       </Routes>
+
     </BrowserRouter>
   );
 }
