@@ -4,6 +4,7 @@ import CreateEvent from "./Components/CreateEvent/CreateEvent";
 import Uploads from "./Components/Uploads/Uploads";
 import Requests from "./Components/Requests/Requests";
 import Comments from "./Components/Comments/Comments";
+import Sample from "./Components/Sample/Sample";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/comments" element={<Comments />} />
+      </Routes>
+      <Routes>
+        <Route path="/sample" element={<Sample/>} />
       </Routes>
 
     </BrowserRouter>
