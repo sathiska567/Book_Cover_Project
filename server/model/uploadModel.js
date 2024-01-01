@@ -1,13 +1,14 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const imageDetailsSchema = new mongoose.Schema(
-        {
-                image: String
-        },
-        {
-                collection: "ImageDetails"
-        }
-)
+const imageDetailsSchema = new mongoose.Schema({
+  imageUrl: {
+    type: String
+  },
+  publicId: {
+    type: String
+  }
+});
 
+const ImageGalleryDetails = mongoose.model("ImageGalleryImages", imageDetailsSchema);
 
-mongoose.model("ImageDetails", imageDetailsSchema)
+module.exports = ImageGalleryDetails;
