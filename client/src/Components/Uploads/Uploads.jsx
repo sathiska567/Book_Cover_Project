@@ -112,18 +112,26 @@ const handleVideoPreview = async (file) => {
           <Form.Item>
             <hr />
             <Form.Item
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: "20px"
+             }}
               label="Upload Videos for Gallery"
             >
-              <Upload
-                listType="video"
-                fileList={videoFileList}
-                onPreview={handleVideoPreview}
-                onChange={handleVideoChange}
-              >
-                {videoFileList.length >= 10 ? null : uploadButton}
-              </Upload>
+              <div className="VideoUpload" style={{
+                width: "100%",
+                paddingLeft: "10px",
+
+              }}>
+                <Upload
+                  listType="video"
+                  fileList={videoFileList}
+                  onPreview={handleVideoPreview}
+                  onChange={handleVideoChange}
+                >
+                  {videoFileList.length >= 3 ? null : uploadButton}
+                </Upload>
+              </div>
             </Form.Item>
+
             <Modal
               visible={videoPreviewOpen}
               title={videoPreviewTitle}
@@ -133,7 +141,9 @@ const handleVideoPreview = async (file) => {
               <video
                 ref={videoRef}
                 controls
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                }}
                 src={videoPreviewImage}
               />
             </Modal>

@@ -66,8 +66,11 @@ const CreateEvent = () => {
           layout="vertical"
           onFinish={handleSubmit}
           style={{
-            width: "50%",
+            width: "60%",
+            padding: "10px 50px 10px 50px",
             margin: "auto",
+            border: "1px solid #D9D9D9",
+            borderRadius: "20px",
           }}
         >
           <Form.Item

@@ -1,0 +1,14 @@
+.btnView {
+    border-color: #25D366 !important;
+    color: #25D366 !important;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btnDel {
+    font-family: 'Roboto', sans-serif;
+}
+
+.customTable .ant-table-thead > tr > th {
+  background-color: #1D5596;
+    color: #fff;
+}
