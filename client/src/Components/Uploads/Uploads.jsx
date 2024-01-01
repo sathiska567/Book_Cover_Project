@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Upload, Form, Button } from "antd";
+import { Modal, Upload, Form, Button, message } from "antd";
 import SideBar from "../SideBar/SideBar";
 import "./Uploads.css";
+import axios from "axios";
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -25,6 +26,8 @@ const Uploads = () => {
   const [videoPreviewImage, setVideoPreviewImage] = useState("");
   const videoRef = React.useRef(null);
 
+  const [image,setImage] = useState({})
+
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -36,7 +39,29 @@ const Uploads = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
+
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+
+  // handle the image upload
+  // const handleUpload = async(e)=>{
+  //   try {
+  //   const file = e.target.files[0]
+
+  //   // console.log(file);
+  //   const formData = new FormData()
+  //   formData.append("image",file)
+
+  //   const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image",formData)
+  //   message.success("Image upload is successfull")
+  //   setImage(data.url)
+
+  //   } catch (error) {
+  //     message.error("Error have Uploading image and videos section")
+  //   }
+
+  // }
+
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -65,12 +90,27 @@ const handleVideoPreview = async (file) => {
     setVideoPreviewOpen(false);
   };
 
-  const handleSubmit = (values) => {
-    console.log("Received values of form: ", values);
-    const formData = new FormData();
-    videoFileList.forEach((file) => {
-      formData.append("videos", file);
-    });
+  const handleSubmit = async(e) => {
+    
+    try {
+     console.log(fileList[0].originFileObj);
+     const file = fileList[0].originFileObj;
+
+      const formData = new FormData()
+
+      formData.append("image",file)
+      console.log([...formData]);
+
+      const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image-gallery",formData)
+
+      message.success("Uploaded successfull")
+      console.log(data.url);
+
+
+    } catch (error) {
+      console.error("Error uploading files:", error);
+      message.error("Error uploading files");
+    }
   };
 
   return (
@@ -98,6 +138,10 @@ const handleVideoPreview = async (file) => {
             >
               {fileList.length >= 10 ? null : uploadButton}
             </Upload>
+
+         {/* <input type="file" name='image' id='image' onChange={handleUpload} />  onChange={(e)=>setFile(e.target.files[0])} */}
+         {/* <br /><img src={image} alt="" style={{width:"50px"}} /> */}
+         
           </Form.Item>
           <Modal
             visible={previewOpen}
