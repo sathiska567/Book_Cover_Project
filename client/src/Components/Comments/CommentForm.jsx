@@ -35,26 +35,22 @@ const CommentForm = () => {
                   left: "100%",
                 }}
               >
-                <a href="/requestlist" title="close">
+                <a href="/comment" title="close">
                   <CloseCircleOutlined
                     style={{ fontSize: "25px", color: "red" }}
                   />
                 </a>
               </div>
-              <Form.Item label="Organization Name:" name="orgName">
+              <Form.Item label="Username:" name="orgName">
                 <Input className="reqOrganizationName" disabled />
               </Form.Item>
 
-              <Form.Item label="Email:" name="email">
-                <Input className="reqEmail" disabled />
+              <Form.Item label="Date:" name="commentDate">
+                <Input disabled className="commentDate" />
               </Form.Item>
 
-              <Form.Item label="Requester's Name:" name="rqeName">
-                <Input disabled className="reqName" />
-              </Form.Item>
-
-              <Form.Item label="Request:" name="request">
-                <Input.TextArea disabled className="request" />
+              <Form.Item label="Comment:" name="comment">
+                <Input.TextArea rows={5} disabled className="comment" />
               </Form.Item>
 
               <Form.Item

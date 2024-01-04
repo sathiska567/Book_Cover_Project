@@ -7,7 +7,7 @@ import RequestTable from "./Components/Requests/RequestTable";
 import CommentTable from "./Components/Comments/CommentTable";
 // import CommentForm from "./Components/Comments/CommentForm";
 // import Requests from "./Components/Requests/Requests";
-// import Comments from "./Components/Comments/Comments";
+import CommentsForm from "./Components/Comments/CommentForm";
 // import Sample from "./Components/Sample/Sample";
 
 function App() {
@@ -28,7 +28,6 @@ function App() {
       {/* <Routes>
         <Route path="/sample" element={<Sample/>} />
       </Routes> */}
-
     </BrowserRouter>
   );
 }

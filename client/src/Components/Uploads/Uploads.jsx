@@ -13,9 +13,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-
 const Uploads = () => {
-
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -26,7 +24,7 @@ const Uploads = () => {
   const [videoPreviewImage, setVideoPreviewImage] = useState("");
   const videoRef = React.useRef(null);
 
-  const [image,setImage] = useState({})
+  const [image, setImage] = useState({});
 
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
@@ -61,7 +59,6 @@ const Uploads = () => {
 
   // }
 
-
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -73,16 +70,17 @@ const Uploads = () => {
     setVideoFileList(info.fileList);
   };
 
-const handleVideoPreview = async (file) => {
-  if (!file.url && !file.preview) {
-    file.preview = await getBase64(file.originFileObj);
-  }
+  const handleVideoPreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
 
-
-  setVideoPreviewImage(file.url || file.preview);
-  setVideoPreviewOpen(true);
-  setVideoPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
-};
+    setVideoPreviewImage(file.url || file.preview);
+    setVideoPreviewOpen(true);
+    setVideoPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
+  };
   const handleVideoCancel = () => {
     if (videoRef.current) {
       videoRef.current.pause();
@@ -90,23 +88,23 @@ const handleVideoPreview = async (file) => {
     setVideoPreviewOpen(false);
   };
 
-  const handleSubmit = async(e) => {
-    
+  const handleSubmit = async (e) => {
     try {
-     console.log(fileList[0].originFileObj);
-     const file = fileList[0].originFileObj;
+      console.log(fileList[0].originFileObj);
+      const file = fileList[0].originFileObj;
 
-      const formData = new FormData()
+      const formData = new FormData();
 
-      formData.append("image",file)
+      formData.append("image", file);
       console.log([...formData]);
 
-      const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image-gallery",formData)
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/upload/upload-image-gallery",
+        formData
+      );
 
-      message.success("Uploaded successfull")
+      message.success("Uploaded successfull");
       console.log(data.url);
-
-
     } catch (error) {
       console.error("Error uploading files:", error);
       message.error("Error uploading files");
@@ -138,7 +136,6 @@ const handleVideoPreview = async (file) => {
             >
               {fileList.length >= 10 ? null : uploadButton}
             </Upload>
-         
           </Form.Item>
           <Modal
             visible={previewOpen}
@@ -148,20 +145,29 @@ const handleVideoPreview = async (file) => {
           >
             <img alt="example" style={{ width: "100%" }} src={previewImage} />
           </Modal>
-
+          <Button 
+          type="primary" 
+          htmlType="submit"
+          style={{
+            marginBottom: "20px",
+          }}
+          >
+            Submit Images
+          </Button>
           {/* Submit button */}
           <Form.Item>
             <hr />
             <Form.Item
-              style={{ marginTop: "20px"
-             }}
+              style={{ marginTop: "20px" }}
               label="Upload Videos for Gallery"
             >
-              <div className="VideoUpload" style={{
-                width: "100%",
-                paddingLeft: "10px",
-
-              }}>
+              <div
+                className="VideoUpload"
+                style={{
+                  width: "100%",
+                  paddingLeft: "10px",
+                }}
+              >
                 <Upload
                   listType="video"
                   fileList={videoFileList}
@@ -189,7 +195,7 @@ const handleVideoPreview = async (file) => {
               />
             </Modal>
             <Button type="primary" htmlType="submit">
-              Submit
+              Submit Videos
             </Button>
           </Form.Item>
         </Form>
