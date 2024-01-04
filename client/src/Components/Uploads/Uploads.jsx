@@ -138,9 +138,6 @@ const handleVideoPreview = async (file) => {
             >
               {fileList.length >= 10 ? null : uploadButton}
             </Upload>
-
-         {/* <input type="file" name='image' id='image' onChange={handleUpload} />  onChange={(e)=>setFile(e.target.files[0])} */}
-         {/* <br /><img src={image} alt="" style={{width:"50px"}} /> */}
          
           </Form.Item>
           <Modal

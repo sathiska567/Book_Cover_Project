@@ -29,6 +29,7 @@ const CreateEvent = () => {
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
   };
+  
   const beforeUpload = (file) => {
     const isImage = file.type.startsWith("image/");
     if (!isImage) {
