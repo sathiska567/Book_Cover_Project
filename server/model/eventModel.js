@@ -7,7 +7,7 @@ const CreateEventSchema = new mongoose.Schema({
     required : [true , "Event Name is required"]
  },
 
- EventDate: {
+ EventDate:{
     type: Object,
     required: [true, "Event date is required"],
 },
@@ -21,17 +21,6 @@ const CreateEventSchema = new mongoose.Schema({
     type:String,
     required : [true , "Event Description is required"]
  },
-
- imageUrl: {
-     type: String,
-
-},
-
-publicId: {
-
-    type: String
-     
-}
 
 })
 

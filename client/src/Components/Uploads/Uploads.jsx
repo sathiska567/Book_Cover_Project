@@ -40,25 +40,6 @@ const Uploads = () => {
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
-  // handle the image upload
-  // const handleUpload = async(e)=>{
-  //   try {
-  //   const file = e.target.files[0]
-
-  //   // console.log(file);
-  //   const formData = new FormData()
-  //   formData.append("image",file)
-
-  //   const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image",formData)
-  //   message.success("Image upload is successfull")
-  //   setImage(data.url)
-
-  //   } catch (error) {
-  //     message.error("Error have Uploading image and videos section")
-  //   }
-
-  // }
-
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -88,28 +69,44 @@ const Uploads = () => {
     setVideoPreviewOpen(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (values) => {
     try {
       console.log(fileList[0].originFileObj);
       const file = fileList[0].originFileObj;
-
+  
       const formData = new FormData();
-
       formData.append("image", file);
+  
       console.log([...formData]);
-
-      const { data } = await axios.post(
-        "http://localhost:8080/api/v1/upload/upload-image-gallery",
-        formData
+  
+      const coverImageRes = await axios.post(
+        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set content type for file upload
+          },
+        }
       );
-
-      message.success("Uploaded successfull");
-      console.log(data.url);
+      console.log(coverImageRes);
+  
+      console.log("Received values of form: ", values);
+      
+      const res = await axios.post(
+        "http://localhost:8080/api/v1/event/create-event",
+        {
+          EventName: values.eventName,
+          EventLocation: values.eventLocation,
+          EventDescription: values.eventDescription,
+          EventDate: values.eventDate,
+        }
+      );
+      console.log(res);
     } catch (error) {
-      console.error("Error uploading files:", error);
-      message.error("Error uploading files");
+      console.error("Error during form submission:", error);
     }
   };
+  
 
   return (
     <div>

@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // Create event details router
-router.post("/create-event",createEventController)
+router.post("/create-event", createEventController)
 
 
 module.exports = router;
