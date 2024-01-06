@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    gap: 20px;
 }
 
 .SignUpContainer > :first-child {
@@ -15,7 +14,7 @@
 }
 
 .profileIcon {
-    margin: 30px 30px 30px 30px;
+    margin: 30px 30px 20px 30px;
     padding: 10px;
     width: 60px;
     height: 60px; 
@@ -35,7 +34,7 @@
     justify-content: center;
     align-items: center;
     color: #5A5A5A;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 22px;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
