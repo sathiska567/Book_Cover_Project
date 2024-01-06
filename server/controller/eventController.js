@@ -5,6 +5,8 @@ const createEventController = async (req, res) => {
     // Ensure that the required fields are present in req.body
     const { EventName, EventLocation, EventDescription, EventDate } = req.body;
 
+  console.log(EventDate,EventDescription,EventLocation,EventName);
+
     if (!EventName || !EventLocation || !EventDescription || !EventDate) {
       return res.status(400).send({
         success: false,

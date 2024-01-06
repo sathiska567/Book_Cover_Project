@@ -12,6 +12,8 @@ const coverImageUploadController = async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.files.image.path);
 
+   console.log(result);
+
     // Create an instance of the coverImageGalleryModel
     const coverImageInstance = new coverImageGalleryModel({
       coverimgUrl: result.secure_url,
