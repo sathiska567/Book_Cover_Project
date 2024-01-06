@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import SignupStyles from "./Signup.module.css";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Popover } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import PasswordStrengthBar from "react-password-strength-bar";
 
 
@@ -123,6 +121,16 @@ const onFinish = (values) => {
                 name="password"
                 rules={[
                   { required: true, message: "Please input your password!" },
+                  // This is the custom validator
+                  ({ getFieldValue, validateFields }) => ({
+                    validator(_, value) {
+                      if (value) {
+                        // This will trigger re-validation of the confirmPassword field
+                        validateFields(["confirmPassword"]);
+                      }
+                      return Promise.resolve();
+                    },
+                  }),
                 ]}
               >
                 <Input.Password

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import CreateNewPasswordStyles from "./CreateNewPassword.module.css";
 import { Button, Form, Input, message } from "antd";
@@ -56,6 +57,16 @@ const CreateNewPassword = () => {
               name="password"
               rules={[
                 { required: true, message: "Please input your password!" },
+                // This is the custom validator
+                ({ getFieldValue, validateFields }) => ({
+                  validator(_, value) {
+                    if (value) {
+                      // This will trigger re-validation of the confirmPassword field
+                      validateFields(["confirmPassword"]);
+                    }
+                    return Promise.resolve();
+                  },
+                }),
               ]}
             >
               <Input.Password
