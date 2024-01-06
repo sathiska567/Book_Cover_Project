@@ -79,29 +79,22 @@ const Uploads = () => {
   
       console.log([...formData]);
   
-      const coverImageRes = await axios.post(
-        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+      const upload = await axios.post(
+        "http://localhost:8080/api/v1/upload/upload-image-gallery",
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data", // Set content type for file upload
-          },
-        }
       );
-      console.log(coverImageRes);
+      console.log(upload);
+
+      if(upload.data.success){
+         message.success("Uploaded successfull") 
+       
+      }
+
+      else{
+        message.error("Uploaded failed")
+      }
   
-      console.log("Received values of form: ", values);
-      
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/event/create-event",
-        {
-          EventName: values.eventName,
-          EventLocation: values.eventLocation,
-          EventDescription: values.eventDescription,
-          EventDate: values.eventDate,
-        }
-      );
-      console.log(res);
+          
     } catch (error) {
       console.error("Error during form submission:", error);
     }

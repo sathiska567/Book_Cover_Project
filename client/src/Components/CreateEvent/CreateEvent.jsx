@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { Form, Input, DatePicker, Upload, Button, Modal, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+// import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
+import {PlusOutlined } from "@ant-design/icons";
+
+// 
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 
 const CreateEvent = () => {
   const dateFormat = "DD/MM/YYYY";
@@ -10,104 +20,93 @@ const CreateEvent = () => {
   const [fileList, setFileList] = useState([]);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewTitle, setPreviewTitle] = useState("");
 
-  const handleUpload = ({ file, fileList }) => {
-    if (file.status === "error") {
-      // If the file was rejected in beforeUpload, do not update the state
-      return;
-    }
-    setFileList(fileList);
-    form.setFieldsValue({
-      eventImage: fileList,
-    });
-  };
+  const handleCancel = () => setPreviewOpen(false);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
-      file.preview = URL.createObjectURL(file.originFileObj);
+      file.preview = await getBase64(file.originFileObj);
     }
-
     setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
+    setPreviewOpen(true);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
   };
+
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+
+  const uploadButton = (
+    <button
+      style={{
+        border: 0,
+        background: "none",
+      }}
+      type="button"
+    >
+      <PlusOutlined />
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </button>
+  );
+
   
-  const beforeUpload = (file) => {
-    const isImage = file.type.startsWith("image/");
-    if (!isImage) {
-      message.error("You can only upload image files!");
-      file.status = "error";
-    }
-
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      img.onload = () => {
-        if (img.naturalWidth <= img.naturalHeight) {
-          message.error("Image width should be more than its height");
-          reject(file);
-        } else {
-          resolve(file);
-        }
-      };
-      img.onerror = () => {
-        message.error("Could not load image");
-        reject(file);
-      };
-    });
-  };
-
   const handleSubmit = async (values) => {
     try {
       // Log the received form values
       console.log("Received values of form: ", values);
 
-       
-      // Step 1: Create the event without the image
-      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
-        EventName: values.eventName,
-        EventLocation: values.eventLocation,
-        EventDescription: values.eventDescription,
-        EventDate: values.eventDate,
-      });
+      // // Step 1: Create the event without the image
+      // const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
+      //   EventName: values.eventName,
+      //   EventLocation: values.eventLocation,
+      //   EventDescription: values.eventDescription,
+      //   EventDate: values.eventDate,
+      // });
   
-      // Log the event creation response
-      console.log("Uploaded another details" , eventResponse);
+      // // Log the event creation response
+      // console.log("Uploaded another details" , eventResponse);
 
-
-      // Step 2: Upload the cover image
-      const file = fileList[0].originFileObj;
-      const formData = new FormData();
-      formData.append("image", file);
+        console.log(fileList[0].originFileObj);
+        const file = fileList[0].originFileObj;
+    
+        const formData = new FormData();
+        formData.append("image", file);
+    
+        console.log([...formData]);
+    
+        const upload = await axios.post(
+          "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+          formData,
+        );
+        console.log(upload);
   
-      console.log([...formData]);
-  
-      const coverImageRes = await axios.post(
-        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data", // Set content type for file upload
-          },
+        if(upload.data.success){
+           message.success("Uploaded successfull") 
+         
         }
-      );
   
-      // Log the cover image upload response
-      console.log("Uploaded image details " , coverImageRes);
+        else{
+          message.error("Uploaded failed")
+        }
+    
+            
+      } 
 
-  
-      // Display success message
-      message.success("Event Created Successfully");
-
-    } catch (error) {
+     catch (error) {
       // Display error message
       console.error("Error during form submission:", error);
       message.error("Event Creation Failed");
     }
   };
   
-
-
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
   return (
     <div>
@@ -163,35 +162,27 @@ const CreateEvent = () => {
           >
             <Input.TextArea placeholder="Description" />
           </Form.Item>
-          {/* Form field for image upload */}
-          <Form.Item
-            label="Upload cover image:"
-            name="eventImage"
-            valuePropName="fileList"
-            fileList={fileList}
-            onChange={handleChange}
-            rules={[
-              { required: true, message: "Please upload the event image!" },
-            ]}
-          >
+           {/* Form field for image upload */}
+           <Form.Item label="Upload Images for Gallery">
             <Upload
-              maxCount={1}
-              beforeUpload={beforeUpload}
-              onChange={handleUpload}
+              action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+              listType="picture-card"
+              fileList={fileList}
               onPreview={handlePreview}
-              listType="picture"
+              onChange={handleChange}
             >
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              {fileList.length >= 5 ? null : uploadButton}
             </Upload>
-            {/* Modal for image preview */}
-            <Modal
-              visible={previewVisible}
-              footer={null}
-              onCancel={() => setPreviewVisible(false)}
-            >
-              <img alt="example" style={{ width: "100%" }} src={previewImage} />
-            </Modal>
           </Form.Item>
+            <Modal
+               visible={previewOpen}
+               title={previewTitle}
+               footer={null}
+               onCancel={handleCancel}
+             >
+            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            </Modal>
+         
           {/* Submit button */}
           <Form.Item>
             <Button type="primary" htmlType="submit">
