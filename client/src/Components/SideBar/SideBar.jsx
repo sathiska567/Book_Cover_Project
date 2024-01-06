@@ -95,7 +95,7 @@ const SideBar = ({ children }) => {
               marginRight: "5px",
             }}
           >
-            <Link to="/"> Sign out</Link>
+            <Link to="/login"> Sign out</Link>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -122,7 +122,7 @@ const SideBar = ({ children }) => {
               </a>
             </span>
             <span style={{ color: "white" }} className="notificaiton">
-              <a href="/">
+              <a href="/login">
                 <Space size={24}>
                   {/* Notification badge */}
                   <Avatar className="avatar" icon={<LogoutOutlined />} />

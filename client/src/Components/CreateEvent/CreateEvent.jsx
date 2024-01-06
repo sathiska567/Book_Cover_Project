@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { Form, Input, DatePicker, Upload, Button, Modal, message } from "antd";
-// import { UploadOutlined } from "@ant-design/icons";
-import axios from "axios";
 import {PlusOutlined } from "@ant-design/icons";
 
 // 
@@ -14,17 +12,14 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
+
 const CreateEvent = () => {
-  const dateFormat = "DD/MM/YYYY";
-  const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  /*------------ Image Upload Function Start--------------------- */
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-
+  const [fileList, setFileList] = useState([]);
   const handleCancel = () => setPreviewOpen(false);
-
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -35,9 +30,7 @@ const CreateEvent = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-
   const uploadButton = (
     <button
       style={{
@@ -57,56 +50,13 @@ const CreateEvent = () => {
     </button>
   );
 
-  
-  const handleSubmit = async (values) => {
-    try {
-      // Log the received form values
-      console.log("Received values of form: ", values);
+  /*------------ Image Upload Function END--------------------- */
+  const dateFormat = "DD/MM/YYYY";
+  const [form] = Form.useForm();
 
-      // // Step 1: Create the event without the image
-      // const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
-      //   EventName: values.eventName,
-      //   EventLocation: values.eventLocation,
-      //   EventDescription: values.eventDescription,
-      //   EventDate: values.eventDate,
-      // });
-  
-      // // Log the event creation response
-      // console.log("Uploaded another details" , eventResponse);
-
-        console.log(fileList[0].originFileObj);
-        const file = fileList[0].originFileObj;
-    
-        const formData = new FormData();
-        formData.append("image", file);
-    
-        console.log([...formData]);
-    
-        const upload = await axios.post(
-          "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
-          formData,
-        );
-        console.log(upload);
-  
-        if(upload.data.success){
-           message.success("Uploaded successfull") 
-         
-        }
-  
-        else{
-          message.error("Uploaded failed")
-        }
-    
-            
-      } 
-
-     catch (error) {
-      // Display error message
-      console.error("Error during form submission:", error);
-      message.error("Event Creation Failed");
-    }
+  const handleSubmit = (values) => {
+    console.log("Received values of form: ", values);
   };
-  
 
   return (
     <div>
@@ -132,24 +82,39 @@ const CreateEvent = () => {
           >
             <Input placeholder="Event name" />
           </Form.Item>
-          <Form.Item
-            label="Enter event date:"
-            name="eventDate"
-            rules={[
-              { required: true, message: "Please select the event date!" },
-            ]}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "50px",
+            }}
           >
-            <DatePicker format={dateFormat} />
-          </Form.Item>
-          <Form.Item
-            label="Event Location:"
-            name="eventLocation"
-            rules={[
-              { required: true, message: "Please input the event location!" },
-            ]}
-          >
-            <Input placeholder="Location" />
-          </Form.Item>
+            <div style={{ flex: 1 }}>
+              <Form.Item
+                label="Enter event date:"
+                name="eventDate"
+                rules={[
+                  { required: true, message: "Please select the event date!" },
+                ]}
+              >
+                <DatePicker format={dateFormat} style={{ width: "100%" }} />
+              </Form.Item>
+            </div>
+            <div style={{ flex: 1 }}>
+              <Form.Item
+                label="Event Location:"
+                name="eventLocation"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the event location!",
+                  },
+                ]}
+              >
+                <Input placeholder="Location" style={{ width: "100%" }} />
+              </Form.Item>
+            </div>
+          </div>
           <Form.Item
             label="Event Description:"
             name="eventDescription"
@@ -162,8 +127,16 @@ const CreateEvent = () => {
           >
             <Input.TextArea placeholder="Description" />
           </Form.Item>
-           {/* Form field for image upload */}
-           <Form.Item label="Upload Images for Gallery">
+          {/* Form field for image upload */}
+          <Form.Item
+            label="Upload cover image:"
+            name="eventImage"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => e && e.fileList}
+            rules={[
+              { required: true, message: "Please upload the event image!" },
+            ]}
+          >
             <Upload
               action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
               listType="picture-card"
@@ -171,18 +144,23 @@ const CreateEvent = () => {
               onPreview={handlePreview}
               onChange={handleChange}
             >
-              {fileList.length >= 5 ? null : uploadButton}
+              {fileList.length >= 1 ? null : uploadButton}
             </Upload>
-          </Form.Item>
             <Modal
-               visible={previewOpen}
-               title={previewTitle}
-               footer={null}
-               onCancel={handleCancel}
-             >
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+              open={previewOpen}
+              title={previewTitle}
+              footer={null}
+              onCancel={handleCancel}
+            >
+              <img
+                alt="example"
+                style={{
+                  width: "100%",
+                }}
+                src={previewImage}
+              />
             </Modal>
-         
+          </Form.Item>
           {/* Submit button */}
           <Form.Item>
             <Button type="primary" htmlType="submit">

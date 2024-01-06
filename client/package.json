@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "antd": "^5.12.5",
-    "moment": "^2.30.1",
     "axios": "^1.6.3",
+    "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.21.1",
     "video-react": "^0.16.0"
   },

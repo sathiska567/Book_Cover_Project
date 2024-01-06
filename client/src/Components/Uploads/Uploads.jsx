@@ -40,6 +40,25 @@ const Uploads = () => {
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
+  // handle the image upload
+  // const handleUpload = async(e)=>{
+  //   try {
+  //   const file = e.target.files[0]
+
+  //   // console.log(file);
+  //   const formData = new FormData()
+  //   formData.append("image",file)
+
+  //   const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image",formData)
+  //   message.success("Image upload is successfull")
+  //   setImage(data.url)
+
+  //   } catch (error) {
+  //     message.error("Error have Uploading image and videos section")
+  //   }
+
+  // }
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -69,37 +88,28 @@ const Uploads = () => {
     setVideoPreviewOpen(false);
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (e) => {
     try {
       console.log(fileList[0].originFileObj);
       const file = fileList[0].originFileObj;
-  
+
       const formData = new FormData();
+
       formData.append("image", file);
-  
       console.log([...formData]);
-  
-      const upload = await axios.post(
+
+      const { data } = await axios.post(
         "http://localhost:8080/api/v1/upload/upload-image-gallery",
-        formData,
+        formData
       );
-      console.log(upload);
 
-      if(upload.data.success){
-         message.success("Uploaded successfull") 
-       
-      }
-
-      else{
-        message.error("Uploaded failed")
-      }
-  
-          
+      message.success("Uploaded successfull");
+      console.log(data.url);
     } catch (error) {
-      console.error("Error during form submission:", error);
+      console.error("Error uploading files:", error);
+      message.error("Error uploading files");
     }
   };
-  
 
   return (
     <div>
@@ -124,7 +134,7 @@ const Uploads = () => {
               onPreview={handlePreview}
               onChange={handleChange}
             >
-              {fileList.length >= 10 ? null : uploadButton}
+              {fileList.length >= 4 ? null : uploadButton}
             </Upload>
           </Form.Item>
           <Modal
@@ -164,7 +174,7 @@ const Uploads = () => {
                   onPreview={handleVideoPreview}
                   onChange={handleVideoChange}
                 >
-                  {videoFileList.length >= 3 ? null : uploadButton}
+                  {videoFileList.length >= 2 ? null : uploadButton}
                 </Upload>
               </div>
             </Form.Item>
