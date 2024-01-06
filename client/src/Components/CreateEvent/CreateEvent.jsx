@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { Form, Input, DatePicker, Upload, Button, Modal, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const CreateEvent = () => {
   const dateFormat = "DD/MM/YYYY";
@@ -55,9 +56,58 @@ const CreateEvent = () => {
     });
   };
 
-  const handleSubmit = (values) => {
-    console.log("Received values of form: ", values);
+  const handleSubmit = async (values) => {
+    try {
+      // Log the received form values
+      console.log("Received values of form: ", values);
+
+       
+      // Step 1: Create the event without the image
+      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
+        EventName: values.eventName,
+        EventLocation: values.eventLocation,
+        EventDescription: values.eventDescription,
+        EventDate: values.eventDate,
+      });
+  
+      // Log the event creation response
+      console.log("Uploaded another details" , eventResponse);
+
+
+      // Step 2: Upload the cover image
+      const file = fileList[0].originFileObj;
+      const formData = new FormData();
+      formData.append("image", file);
+  
+      console.log([...formData]);
+  
+      const coverImageRes = await axios.post(
+        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set content type for file upload
+          },
+        }
+      );
+  
+      // Log the cover image upload response
+      console.log("Uploaded image details " , coverImageRes);
+
+  
+      // Display success message
+      message.success("Event Created Successfully");
+
+    } catch (error) {
+      // Display error message
+      console.error("Error during form submission:", error);
+      message.error("Event Creation Failed");
+    }
   };
+  
+
+
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
   return (
     <div>
@@ -118,7 +168,8 @@ const CreateEvent = () => {
             label="Upload cover image:"
             name="eventImage"
             valuePropName="fileList"
-            getValueFromEvent={(e) => e && e.fileList}
+            fileList={fileList}
+            onChange={handleChange}
             rules={[
               { required: true, message: "Please upload the event image!" },
             ]}
