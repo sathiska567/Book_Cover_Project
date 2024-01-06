@@ -4,143 +4,30 @@ import SignupStyles from "./Signup.module.css";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Popover } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 
 const Signup = () => {
-
-  // State to manage password visibility
-  const [visible, setVisible] = useState(false);
-  // Function to toggle password visibility
-  const togglePasswordVisibility = () => {
-    setVisible(!visible);
-  };
-
-  // Function to handle form submission
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
-  // Function to handle password validation
-  const [password, setPassword] = useState("");
-  const [passwordStrength, setPasswordStrength] = useState({
-    minLength: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    specialChar: false,
+useEffect(() => {
+  message.config({
+    maxCount: 3,
   });
+}, []);
 
-  const checkPasswordStrength = (password) => {
-    setPasswordStrength({
-      minLength: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /\d/.test(password),
-      specialChar: /[@$!%*?&]/.test(password),
-    });
-  };
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
 
-  const passwordRules = [
-    {
-      required: true,
-      message: "Please input your password!",
-    },
-  ];
-
-  const passwordStrengthPopoverContent = (
-    <div>
-      <div>
-        {passwordStrength.minLength ? (
-          <CheckCircleOutlined
-            style={{
-              color: "#01F700",
-              fontWeight: "bold",
-            }}
-          />
-        ) : (
-          <CloseCircleOutlined
-            style={{
-              color: "red",
-              fontWeight: "bold",
-            }}
-          />
-        )}{" "}
-        Minimum 8 characters
-      </div>
-      <div>
-        {passwordStrength.uppercase ? (
-          <CheckCircleOutlined
-            style={{
-              color: "#01F700",
-              fontWeight: "bold",
-            }}
-          />
-        ) : (
-          <CloseCircleOutlined
-            style={{
-              color: "red",
-              fontWeight: "bold",
-            }}
-          />
-        )}{" "}
-        At least one uppercase letter
-      </div>
-      <div>
-        {passwordStrength.lowercase ? (
-          <CheckCircleOutlined
-            style={{
-              color: "#01F700",
-              fontWeight: "bold",
-            }}
-          />
-        ) : (
-          <CloseCircleOutlined
-            style={{
-              color: "red",
-              fontWeight: "bold",
-            }}
-          />
-        )}{" "}
-        At least one lowercase letter
-      </div>
-      <div>
-        {passwordStrength.number ? (
-          <CheckCircleOutlined
-            style={{
-              color: "#01F700",
-              fontWeight: "bold",
-            }}
-          />
-        ) : (
-          <CloseCircleOutlined
-            style={{
-              color: "red",
-              fontWeight: "bold",
-            }}
-          />
-        )}{" "}
-        At least one number
-      </div>
-      <div>
-        {passwordStrength.specialChar ? (
-          <CheckCircleOutlined
-            style={{
-              color: "#39FF14",
-              fontWeight: "bold",
-            }}
-          />
-        ) : (
-          <CloseCircleOutlined
-            style={{
-              color: "red",
-              fontWeight: "bold",
-            }}
-          />
-        )}{" "}
-        At least one special character
-      </div>
-    </div>
-  );
+// Function to handle form submission
+const onFinish = (values) => {
+  if (!values.password || !values.confirmPassword) {
+    message.error("Both fields are required!");
+    return;
+  }
+  if (values.password !== values.confirmPassword) {
+    message.error("Passwords do not match!");
+    return;
+  }
+};
 
   return (
     <div>
@@ -229,45 +116,63 @@ const Signup = () => {
                   ]}
                 />
               </Form.Item>
-
-              <label htmlFor="" className="SignUpLabel">
-                Create a Password:
+              <label className={SignupStyles.SignUpLabel}>
+                Create Password
               </label>
               <Form.Item
                 name="password"
                 rules={[
-                  {
-                    required: true,
-                    message: "Please input password!",
-                  },
+                  { required: true, message: "Please input your password!" },
                 ]}
               >
-                <Popover
-                  content={passwordStrengthPopoverContent}
-                  title="Password Strength"
-                  trigger="focus"
-                >
-                  <Input.Password
-                    type={visible ? "text" : "password"}
-                    style={{
-                      border: "none",
-                      borderBottom: "2px solid #DADADA",
-                      borderRadius: "0px",
-                    }}
-                    className="SignUpInput"
-                    id="password"
-                    name="password"
-                    iconRender={(visible) =>
-                      visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                    }
-                    onClick={togglePasswordVisibility}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      checkPasswordStrength(e.target.value);
-                    }}
-                  />
-                </Popover>
+                <Input.Password
+                  style={{
+                    border: "none",
+                    borderBottom: "2px solid #DADADA",
+                    borderRadius: "0px",
+                  }}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </Form.Item>
+
+              {password && <PasswordStrengthBar password={password} />}
+              <label className={SignupStyles.SignUpLabel}>
+                Confirm Password
+              </label>
+              <Form.Item
+                name="confirmPassword"
+                rules={[
+                  { required: true, message: "Please confirm your password!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("Passwords do not match!")
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  style={{
+                    border: "none",
+                    borderBottom: "2px solid #DADADA",
+                    borderRadius: "0px",
+                  }}
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Form.Item>
+
+              {confirmPassword && (
+                <PasswordStrengthBar password={confirmPassword} />
+              )}
+
               <Button
                 type="primary"
                 className={SignupStyles.SignUpFormButton}
