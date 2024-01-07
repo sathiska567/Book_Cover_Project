@@ -9,7 +9,9 @@ require("./db/db.js")
 const adminRoute = require("./routes/adminRoute.js")
 const eventRoute = require("./routes/eventRoute.js")
 const uploadRoute = require("./routes/uploadRoute.js")
-const CoveruploadRoute = require("./routes/coverImageUploadRoute.js")
+const CoveruploadRoute = require("./routes/coverImageUploadRoute.js");
+const  registerRoute  = require("./routes/registerRoute.js");
+const loginRoute = require("./routes/loginRoute.js")
 
 const app = express()
 
@@ -20,6 +22,8 @@ app.use("/api/v1/admin",adminRoute)
 app.use("/api/v1/event",eventRoute)
 app.use("/api/v1/upload",uploadRoute)
 app.use("/api/v1/coverUpload",CoveruploadRoute)
+app.use("/api/v1/registerUser",registerRoute)
+app.use("/api/v1/loginUser",loginRoute)
 
 const PORT = process.env.PORT || 5050 ;
 
