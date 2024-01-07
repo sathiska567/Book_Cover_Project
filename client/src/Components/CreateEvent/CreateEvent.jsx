@@ -109,7 +109,12 @@ const CreateEvent = () => {
       message.error("Event Creation Failed");
     }
   };
-  
+
+  const { TextArea } = Input;
+
+  const onChange = (e) => {
+    console.log("Change:", e.target.value);
+  };
 
   return (
     <div>
@@ -178,7 +183,12 @@ const CreateEvent = () => {
               },
             ]}
           >
-            <Input.TextArea placeholder="Description" />
+            <TextArea
+              showCount
+              maxLength={390}
+              onChange={onChange}
+              placeholder="Description"
+            />
           </Form.Item>
           {/* Form field for image upload */}
           <Form.Item

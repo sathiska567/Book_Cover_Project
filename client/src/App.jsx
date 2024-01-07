@@ -10,6 +10,7 @@ import Login from "./Components/Login/Login";
 import ForgetPassword from "./Components/Login/ForgotPassword";
 import CreateNewPassword from "./Components/Login/CreateNewPassword";
 // import Requests from "./Components/Requests/RequestsForm";
+import UserWebSite from "./Components/UserWebSite/UserWebSite";
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/comments" element={<CommentTable />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/user" element={<UserWebSite />} />
       </Routes>
     </BrowserRouter>
   );
