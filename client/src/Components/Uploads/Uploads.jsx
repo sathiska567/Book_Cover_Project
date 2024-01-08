@@ -71,14 +71,15 @@ const Uploads = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log(fileList[1].originFileObj);
-      
+      console.log(fileList.length);
+       
+     for (let i = 0; i < fileList.length; i++) {
 
-      const file = fileList[1].originFileObj;
-
+      const file = fileList[i].originFileObj;
       const formData = new FormData();
 
       formData.append("image", file);
+
       console.log([...formData]);
 
       const { data } = await axios.post(
@@ -86,14 +87,20 @@ const Uploads = () => {
         formData
       );
 
-      message.success("Uploaded successfull");
-      console.log(data);
+      message.success((i+1) + " " + "Image Uploaded successfull");
+      
+     }
+
 
     } catch (error) {
       console.error("Error uploading files:", error);
       message.error("Error uploading files");
     }
   };
+
+  const handleVideoSubmit = async()=>{
+    
+  }
 
   return (
     <div>
@@ -178,7 +185,7 @@ const Uploads = () => {
                 src={videoPreviewImage}
               />
             </Modal>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" onClick={handleVideoSubmit}>
               Submit Videos
             </Button>
           </Form.Item>
