@@ -19,7 +19,6 @@ body {
 }
 
 /*--------------------Header Styles Desktop-start--------------*/
-
 .navBarIcon {
   margin-right: 5px;
 }
@@ -46,8 +45,96 @@ body {
   color: rgba(67, 56, 202, 0.8) !important;
 }
 
-/*--------------------Header Styles Desktop-end--------------*/
+.RegisterButton {
+  width: 120px;
+  height: 40px;
+  background-color: #4338ca;
+  color: white !important;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold; /* Fixed font weight added */
+}
 
+.RegisterButton:hover {
+  border: 2px solid #4338ca;
+  background-color: white;
+  color: 4338ca !important;
+}
+
+/*-----------------arrow animation Start -Desktop------------*/
+.arrows {
+  width: 60px;
+  height: 72px;
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  bottom: 10%;
+  color: #000080;
+}
+
+.arrows path {
+  stroke: white;
+  fill: transparent;
+  stroke-width: 2px;
+  animation: arrow 2s infinite;
+  -webkit-animation: arrow 2s infinite;
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/ {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.arrows path.a1 {
+  animation-delay: -1s;
+  -webkit-animation-delay: -1s;
+}
+
+.arrows path.a2 {
+  animation-delay: -0.5s;
+  -webkit-animation-delay: -0.5s;
+}
+
+.arrows path.a3 {
+  animation-delay: 0s;
+  -webkit-animation-delay: 0s;
+}
+/*-----------------arrow animation End -Desktop------------*/
+
+/*-----------------arrow animation Start -Mobile------------*/
+@media (max-width: 767px) {
+  .arrows {
+    display: none;
+  }
+}
+/*-----------------arrow animation End -Mobile------------*/
+
+/*--------------------Header Styles Desktop-end--------------*/
 /*--------------------Header Styles Mobile-start--------------*/
 @media (max-width: 767px) {
   body {
@@ -130,18 +217,14 @@ body {
 }
 
 .eventDate {
-  
   margin-top: 40px;
   font-size: 68px;
   font-weight: bold;
   line-height: 0.8;
-
 }
 /*--------------------Event Styles Desktop-end--------------*/
-
 /*--------------------Event Styles Mobile-start--------------*/
 @media (max-width: 767px) {
-
   .EventText {
     padding: 20px;
     padding-left: 20px;
@@ -175,11 +258,10 @@ body {
   height: 100vh;
 }
 
-
 .galleryTitle {
-    font-size: 56px;
-    font-weight: bold;
-    margin : 40px;
+  font-size: 56px;
+  font-weight: bold;
+  margin: 40px;
 }
 
 .galleryTitle::first-letter {
@@ -188,16 +270,13 @@ body {
 /*--------------------Gallery Styles Desktop-end--------------*/
 /*--------------------Gallery Styles Mobile-start--------------*/
 @media (max-width: 767px) {
-
-
-    .galleryTitle {
-        font-size: 36px;
-        font-weight: bold;
-        margin : 30px;
-    }
+  .galleryTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px;
+  }
 }
 /*--------------------Gallery Styles Mobile-end--------------*/
-
 
 /*--------------------Request Styles Desktop-start--------------*/
 .RequestContainer {
@@ -205,11 +284,10 @@ body {
   height: 100vh;
 }
 
-
 .RequestTitle {
-    font-size: 56px;
-    font-weight: bold;
-    margin : 30px 40px 40px 40px;
+  font-size: 56px;
+  font-weight: bold;
+  margin: 30px 40px 40px 40px;
 }
 
 .RequestTitle::first-letter {
@@ -219,11 +297,11 @@ body {
 /*--------------------Request Styles Desktop-end--------------*/
 /*--------------------Request Styles Mobile-start--------------*/
 @media (max-width: 767px) {
-    .RequestTitle {
-        font-size: 36px;
-        font-weight: bold;
-        margin : 30px;
-    }
+  .RequestTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px;
+  }
 }
 /*--------------------Request Styles Mobile-end--------------*/
 
@@ -233,11 +311,10 @@ body {
   height: 100vh;
 }
 
-
 .YoutubeTitle {
-    font-size: 56px;
-    font-weight: bold;
-    margin : 30px 40px 40px 40px;
+  font-size: 56px;
+  font-weight: bold;
+  margin: 30px 40px 40px 40px;
 }
 
 .YoutubeTitle::first-letter {
@@ -247,25 +324,24 @@ body {
 /*--------------------Youtube Styles Desktop-end--------------*/
 /*--------------------Youtube Styles Mobile-start--------------*/
 @media (max-width: 767px) {
-    .YoutubeTitle {
-        font-size: 36px;
-        font-weight: bold;
-        margin : 30px;
-    }
+  .YoutubeTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px;
+  }
 }
 /*--------------------Youtube Styles Mobile-end--------------*/
 
 /*--------------------Author Styles Desktop-start--------------*/
 .AuthorContainer {
   width: 100vw;
-  height: 100vh;
+  height: 105vh;
 }
 
-
 .AuthorTitle {
-    font-size: 56px;
-    font-weight: bold;
-    margin : 30px 40px 40px 40px;
+  font-size: 56px;
+  font-weight: bold;
+  margin: 30px 40px 40px 40px;
 }
 
 .AuthorTitle::first-letter {
@@ -274,11 +350,159 @@ body {
 
 /*--------------------Author Styles Desktop-end--------------*/
 /*--------------------Author Styles Mobile-start--------------*/
+
 @media (max-width: 767px) {
-    .AuthorTitle {
-        font-size: 36px;
-        font-weight: bold;
-        margin : 30px;
-    }
+  .AuthorContainer {
+    width: 100vw;
+    height: 166vh;
+  }
+
+  .AuthorTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px;
+  }
 }
 /*--------------------YouAuthortube Styles Mobile-end--------------*/
+
+/*--------------------Footer Styles Desktop-start--------------*/
+.FooterContainer {
+  border-radius: 0% 100% 0% 0% / 0% 27% 76% 10%;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #16151a;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 30px;
+}
+
+.FooterLogo {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.FooterNavigation {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 150px;
+}
+
+.FooterNavigation a {
+  text-decoration: none;
+  color: white;
+  transition: 0.5s;
+}
+
+.FooterNavigation a:hover {
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.FooterButton {
+  width: 90px;
+}
+
+.FooterSocialLinks {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.mobileFooterContainer {
+  display: none;
+}
+
+/*--------------------Footer Styles Desktop-end--------------*/
+/*--------------------Footer Styles Mobile-start--------------*/
+
+@media (max-width: 767px) {
+  .FooterContainer {
+    display: none;
+  }
+  .mobileFooterContainer {
+    border-radius: 84% 100% 0% 0% / 29% 30% 76% 10%;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #16151a;
+  }
+
+  .FooterContainer {
+    display: none;
+  }
+
+  .navbarButtonContainer {
+    /* Add this class */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .mobileNavigation {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .mobileNavigation a {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+  }
+
+  .FooterMobileButton {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    margin: auto;
+  }
+
+  .FooterSocialLinksMobile {
+    margin-bottom: 0 !important;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+/*--------------------Footer Styles Mobile-end--------------*/
+
+/*--------------------copyright Styles Desktop-start--------------*/
+.copyright {
+  color: white;
+  background-color: #16151a;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+/*--------------------copyright Styles Desktop-End--------------*/
+
+/*--------------------copyright Styles Mobile-start--------------*/
+
+@media (max-width: 767px) {
+  .copyright {
+    font-size: 12px;
+    padding-top: 10px;
+  }
+}
+/*--------------------copyright Styles Mobile-end--------------*/
