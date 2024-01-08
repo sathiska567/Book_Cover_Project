@@ -40,25 +40,6 @@ const Uploads = () => {
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
-  // handle the image upload
-  // const handleUpload = async(e)=>{
-  //   try {
-  //   const file = e.target.files[0]
-
-  //   // console.log(file);
-  //   const formData = new FormData()
-  //   formData.append("image",file)
-
-  //   const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image",formData)
-  //   message.success("Image upload is successfull")
-  //   setImage(data.url)
-
-  //   } catch (error) {
-  //     message.error("Error have Uploading image and videos section")
-  //   }
-
-  // }
-
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -90,12 +71,15 @@ const Uploads = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log(fileList[0].originFileObj);
-      const file = fileList[0].originFileObj;
+      console.log(fileList.length);
+       
+     for (let i = 0; i < fileList.length; i++) {
 
+      const file = fileList[i].originFileObj;
       const formData = new FormData();
 
       formData.append("image", file);
+
       console.log([...formData]);
 
       const { data } = await axios.post(
@@ -103,13 +87,20 @@ const Uploads = () => {
         formData
       );
 
-      message.success("Uploaded successfull");
-      console.log(data.url);
+      message.success((i+1) + " " + "Image Uploaded successfull");
+      
+     }
+
+
     } catch (error) {
       console.error("Error uploading files:", error);
       message.error("Error uploading files");
     }
   };
+
+  const handleVideoSubmit = async()=>{
+    
+  }
 
   return (
     <div>
@@ -194,7 +185,7 @@ const Uploads = () => {
                 src={videoPreviewImage}
               />
             </Modal>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" onClick={handleVideoSubmit}>
               Submit Videos
             </Button>
           </Form.Item>

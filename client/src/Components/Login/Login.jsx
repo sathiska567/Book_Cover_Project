@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import LoginStyles from "./Login.module.css";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [email,setEmail] = useState("")
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // State to manage password visibility
   const [visible, setVisible] = useState(false);
@@ -19,6 +24,32 @@ const Login = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+
+
+  const handleLogin = async()=>{
+          console.log(email,password);
+        
+          try {
+            const response = await axios.post("http://localhost:8080/api/v1/loginUser/login",{email:email , password:password})
+
+            if(response.data.success){
+            const token = response.data.token;
+            localStorage.setItem("token", token);
+            // console.log(response.data);
+
+            message.success("Login Successfull");
+            navigate("/createEvent")
+
+            }
+
+            else{
+              message.error("Please Enter Correct credential")
+            }
+
+          } catch (error) {
+             message.error("Please Enter Correct credential");
+          }
+  }
 
   return (
     <div>
@@ -55,6 +86,7 @@ const Login = () => {
                     message: "Please input your email!",
                   },
                 ]}
+                
               >
                 <Input
                   type="email"
@@ -72,6 +104,7 @@ const Login = () => {
                       message: "Please input your email!",
                     },
                   ]}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Item>
 
@@ -101,6 +134,7 @@ const Login = () => {
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
                   onClick={togglePasswordVisibility}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Item>
               <div
@@ -117,6 +151,7 @@ const Login = () => {
                 type="primary"
                 className={LoginStyles.LoginFormButton}
                 htmlType="submit"
+                onClick={handleLogin}
               >
                 Sign In
               </Button>
