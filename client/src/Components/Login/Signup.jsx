@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import SignupStyles from "./Signup.module.css";
 import { Button, Form, Input, message, Popover } from "antd";
 import PasswordStrengthBar from "react-password-strength-bar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
@@ -12,8 +14,13 @@ useEffect(() => {
   });
 }, []);
 
+
+const [username,setUserName] = useState("")
+const [email,setEmail] = useState("")
 const [password, setPassword] = useState("");
 const [confirmPassword, setConfirmPassword] = useState("");
+
+const navigate = useNavigate();
 
 // Function to handle form submission
 const onFinish = (values) => {
@@ -26,6 +33,33 @@ const onFinish = (values) => {
     return;
   }
 };
+
+// Register API
+
+const handleSubmit = async()=>{
+
+  console.log(password,email,username);
+    
+   try {
+    const response = await axios.post("http://localhost:8080/api/v1/registerUser/register",{username:username , email:email ,password:password })
+   console.log(response);
+    
+   if(response.data.success){
+       message.success("User registered successfully!");
+       navigate("/login")
+   }
+   else{
+    message.error("Error registering user!");
+   }
+
+   } catch (error) {
+     message.error("Error registering user!");
+   }
+
+
+
+}
+
 
   return (
     <div>
@@ -81,6 +115,7 @@ const onFinish = (values) => {
                       required: true,
                     },
                   ]}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </Form.Item>
 
@@ -112,6 +147,7 @@ const onFinish = (values) => {
                       message: "Please input your email!",
                     },
                   ]}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Item>
               <label className={SignupStyles.SignUpLabel}>
@@ -185,6 +221,7 @@ const onFinish = (values) => {
                 type="primary"
                 className={SignupStyles.SignUpFormButton}
                 htmlType="submit"
+                onClick={handleSubmit}
               >
                 CREATE AN ACCOUNT
               </Button>
