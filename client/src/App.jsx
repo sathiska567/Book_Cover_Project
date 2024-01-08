@@ -9,36 +9,87 @@ import Signup from "./Components/Login/Signup";
 import Login from "./Components/Login/Login";
 import ForgetPassword from "./Components/Login/ForgotPassword";
 import CreateNewPassword from "./Components/Login/CreateNewPassword";
+import PublicRoute from "./Components/PublicRoute/PublicRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 // import Requests from "./Components/Requests/RequestsForm";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
       </Routes>
+
+
       <Routes>
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        } />
       </Routes>
+
+
       <Routes>
-        <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/forgetpassword" element={
+          <PublicRoute>
+            <ForgetPassword />
+          </PublicRoute>
+
+
+        } />
       </Routes>
 
       <Routes>
-        <Route path="/createnewpassword" element={<CreateNewPassword />} />
+        <Route path="/createnewpassword" element={
+          <PublicRoute>
+            <CreateNewPassword />
+          </PublicRoute>
+
+
+        } />
       </Routes>
 
       <Routes>
-        <Route path="/createEvent" element={<CreateEvent />} />
+        <Route path="/createEvent" element={
+          <ProtectedRoute>
+            <CreateEvent />
+          </ProtectedRoute>
+
+        } />
       </Routes>
+
+
       <Routes>
-        <Route path="/uploads" element={<Uploads />} />
+        <Route path="/uploads" element={
+          <ProtectedRoute>
+            <Uploads />
+          </ProtectedRoute>
+        } />
       </Routes>
+
+
       <Routes>
-        <Route path="/requests" element={<RequestTable />} />
+        <Route path="/requests" element={
+          <ProtectedRoute>
+            <RequestTable />
+          </ProtectedRoute>
+
+
+        } />
       </Routes>
+
+
       <Routes>
-        <Route path="/comments" element={<CommentTable />} />
+        <Route path="/comments" element={
+          <ProtectedRoute>
+            <CommentTable />
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );

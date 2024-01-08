@@ -40,25 +40,6 @@ const Uploads = () => {
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
-  // handle the image upload
-  // const handleUpload = async(e)=>{
-  //   try {
-  //   const file = e.target.files[0]
-
-  //   // console.log(file);
-  //   const formData = new FormData()
-  //   formData.append("image",file)
-
-  //   const {data} = await axios.post("http://localhost:8080/api/v1/upload/upload-image",formData)
-  //   message.success("Image upload is successfull")
-  //   setImage(data.url)
-
-  //   } catch (error) {
-  //     message.error("Error have Uploading image and videos section")
-  //   }
-
-  // }
-
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -90,8 +71,10 @@ const Uploads = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log(fileList[0].originFileObj);
-      const file = fileList[0].originFileObj;
+      console.log(fileList[1].originFileObj);
+      
+
+      const file = fileList[1].originFileObj;
 
       const formData = new FormData();
 
@@ -104,7 +87,8 @@ const Uploads = () => {
       );
 
       message.success("Uploaded successfull");
-      console.log(data.url);
+      console.log(data);
+
     } catch (error) {
       console.error("Error uploading files:", error);
       message.error("Error uploading files");
