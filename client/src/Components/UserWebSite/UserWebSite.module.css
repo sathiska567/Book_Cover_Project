@@ -169,10 +169,12 @@ body {
 
 /*--------------------Event Styles Mobile-end--------------*/
 
+/*--------------------Gallery Styles Desktop-start--------------*/
 .galleryContainer {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
 }
+
 
 .galleryTitle {
     font-size: 56px;
@@ -181,13 +183,102 @@ body {
 }
 
 .galleryTitle::first-letter {
-  border-bottom: 3px solid rgba(67, 56, 202, 0.4);
+  border-bottom: 5px solid rgba(67, 56, 202, 0.4);
 }
-
+/*--------------------Gallery Styles Desktop-end--------------*/
+/*--------------------Gallery Styles Mobile-start--------------*/
 @media (max-width: 767px) {
+
+
     .galleryTitle {
         font-size: 36px;
         font-weight: bold;
         margin : 30px;
     }
 }
+/*--------------------Gallery Styles Mobile-end--------------*/
+
+
+/*--------------------Request Styles Desktop-start--------------*/
+.RequestContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.RequestTitle {
+    font-size: 56px;
+    font-weight: bold;
+    margin : 30px 40px 40px 40px;
+}
+
+.RequestTitle::first-letter {
+  border-bottom: 5px solid rgba(67, 56, 202, 0.4);
+}
+
+/*--------------------Request Styles Desktop-end--------------*/
+/*--------------------Request Styles Mobile-start--------------*/
+@media (max-width: 767px) {
+    .RequestTitle {
+        font-size: 36px;
+        font-weight: bold;
+        margin : 30px;
+    }
+}
+/*--------------------Request Styles Mobile-end--------------*/
+
+/*--------------------Youtube Styles Desktop-start--------------*/
+.YoutubeContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.YoutubeTitle {
+    font-size: 56px;
+    font-weight: bold;
+    margin : 30px 40px 40px 40px;
+}
+
+.YoutubeTitle::first-letter {
+  border-bottom: 5px solid rgba(67, 56, 202, 0.4);
+}
+
+/*--------------------Youtube Styles Desktop-end--------------*/
+/*--------------------Youtube Styles Mobile-start--------------*/
+@media (max-width: 767px) {
+    .YoutubeTitle {
+        font-size: 36px;
+        font-weight: bold;
+        margin : 30px;
+    }
+}
+/*--------------------Youtube Styles Mobile-end--------------*/
+
+/*--------------------Author Styles Desktop-start--------------*/
+.AuthorContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.AuthorTitle {
+    font-size: 56px;
+    font-weight: bold;
+    margin : 30px 40px 40px 40px;
+}
+
+.AuthorTitle::first-letter {
+  border-bottom: 5px solid rgba(67, 56, 202, 0.4);
+}
+
+/*--------------------Author Styles Desktop-end--------------*/
+/*--------------------Author Styles Mobile-start--------------*/
+@media (max-width: 767px) {
+    .AuthorTitle {
+        font-size: 36px;
+        font-weight: bold;
+        margin : 30px;
+    }
+}
+/*--------------------YouAuthortube Styles Mobile-end--------------*/

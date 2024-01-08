@@ -11,6 +11,8 @@ import ForgetPassword from "./Components/Login/ForgotPassword";
 import CreateNewPassword from "./Components/Login/CreateNewPassword";
 // import Requests from "./Components/Requests/RequestsForm";
 import UserWebSite from "./Components/UserWebSite/UserWebSite";
+import Gallery from "./Components/UserWebSite/Gallery";
+
 
 function App() {
   return (
@@ -44,6 +46,9 @@ function App() {
 
       <Routes>
         <Route path="/user" element={<UserWebSite />} />
+      </Routes>
+      <Routes>
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </BrowserRouter>
   );

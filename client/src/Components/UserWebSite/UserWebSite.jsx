@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,13 +7,16 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import userStyles from "./UserWebSite.module.css";
 import { useMediaQuery } from "react-responsive";
-import { Button } from "antd";
 import { Dropdown } from "react-bootstrap";
 import { UserOutlined, LoginOutlined, LogoutOutlined } from "@ant-design/icons";
+import Gallery from "./Gallery";
+import Request from "./Request";
+import YoutubeWidget from "./YoutubeWidget";
+import Author from "./Author";
 
 const UserWebSite = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   return (
     <div className={userStyles.Container}>
@@ -42,19 +45,19 @@ const UserWebSite = () => {
                 <Nav.Link className={userStyles.NavLink} href="#">
                   Home
                 </Nav.Link>
-                <Nav.Link className={userStyles.NavLink} href="#link">
+                <Nav.Link className={userStyles.NavLink} href="#Gallery">
                   Gallery
                 </Nav.Link>
-                <Nav.Link className={userStyles.NavLink} href="#link">
+                <Nav.Link className={userStyles.NavLink} href="#Request">
                   Request Reading
                 </Nav.Link>
-                <Nav.Link className={userStyles.NavLink} href="#link">
+                <Nav.Link className={userStyles.NavLink} href="#YouTubeWidget">
                   YouTube Channel
                 </Nav.Link>
                 <Nav.Link className={userStyles.NavLink} href="#link">
                   Reviews
                 </Nav.Link>
-                <Nav.Link className={userStyles.NavLink} href="#link">
+                <Nav.Link className={userStyles.NavLink} href="#Author">
                   About Author
                 </Nav.Link>
 
@@ -129,8 +132,32 @@ const UserWebSite = () => {
         </div>
       </div>
 
-      <div className={userStyles.galleryContainer}>
+      <div id="Gallery" className={userStyles.galleryContainer}>
         <h1 className={userStyles.galleryTitle}>Gallery</h1>
+        <div className={userStyles.gallery}>
+          <Gallery />
+        </div>
+      </div>
+
+      <div id="Request" className={userStyles.RequestContainer}>
+        <h1 className={userStyles.RequestTitle}>Request Reading</h1>
+        <div className={userStyles.Request}>
+          <Request />
+        </div>
+      </div>
+
+      <div id="YouTubeWidget" className={userStyles.YoutubeContainer}>
+        <h1 className={userStyles.YoutubeTitle}>Watch on YouTube</h1>
+        <div className={userStyles.Youtube}>
+          <YoutubeWidget />
+        </div>
+      </div>
+
+      <div id="Author" className={userStyles.AuthorContainer}>
+        <h1 className={userStyles.AuthorTitle}>About Author</h1>
+        <div className={userStyles.Author}>
+          <Author />
+        </div>
       </div>
     </div>
   );
