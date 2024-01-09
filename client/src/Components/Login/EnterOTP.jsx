@@ -53,7 +53,7 @@ const EnterOTP = () => {
                 type="primary"
                 className={EnterOTPStyles.EnterOTPFormButton}
                 htmlType="submit"
-                href="/createnewpassword"
+                // href="/createnewpassword"
               >
                 NEXT
               </Button>
