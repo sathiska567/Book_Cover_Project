@@ -25,6 +25,20 @@ const ForgotPassword = () => {
     console.log("Received values of form: ", values);
   };
 
+  const handleSendEmail = async()=>{
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/forgottenPassword/sendOTP",{email:otpSendEmail})
+      console.log(response);
+  
+       if(response.data.success){
+        navigate("/createnewpassword")
+        message.success("OTP Sent Successfully")
+       }
+    } catch (error) {
+       message.error("Found Error in Send OTP")
+    }
+  }
+
   return (
     <div>
       <div className={ForgetPasswordStyles.ForgetPasswordContainer}>
