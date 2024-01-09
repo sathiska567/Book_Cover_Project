@@ -4,15 +4,13 @@ import ForgetPasswordStyles from "./ForgotPassword.module.css";
 import { Button, Form, Input, message } from "antd";
 import axios  from 'axios';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import { Button, Form, Input } from "antd";
->>>>>>> 24bcb8c03be45d80e25c1a0d9e7b32c854eb60b0
 
 
 const ForgotPassword = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [otpSendEmail , setOtpSendEmail] = useState("")
+  const navigate = useNavigate();
 
   // State to manage password visibility
   const [visible, setVisible] = useState(false);
@@ -25,6 +23,20 @@ const ForgotPassword = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+
+  const handleSendEmail = async()=>{
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/forgottenPassword/sendOTP",{email:otpSendEmail})
+      console.log(response);
+  
+       if(response.data.success){
+        navigate("/createnewpassword")
+        message.success("OTP Sent Successfully")
+       }
+    } catch (error) {
+       message.error("Found Error in Send OTP")
+    }
+  }
 
   return (
     <div>
@@ -86,6 +98,7 @@ const ForgotPassword = () => {
                   className="ForgetPasswordInput"
                   id="email"
                   name="email"
+                  onChange={(e) => setOtpSendEmail(e.target.value)}
                 />
               </Form.Item>
 
