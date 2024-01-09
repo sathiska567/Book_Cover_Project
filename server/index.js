@@ -13,6 +13,7 @@ const CoveruploadRoute = require("./routes/coverImageUploadRoute.js");
 const  registerRoute  = require("./routes/registerRoute.js");
 const loginRoute = require("./routes/loginRoute.js")
 const videoUploadRoute = require("./routes/uploadVideoRoute.js")
+const forgottenPasswordRoute = require("./routes/forgottenPasswordRoute.js")
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use("/api/v1/videoUpload",videoUploadRoute)
 
 app.use("/api/v1/registerUser",registerRoute)
 app.use("/api/v1/loginUser",loginRoute)
+app.use("/api/v1/forgottenPassword",forgottenPasswordRoute)
 
 const PORT = process.env.PORT || 5050 ;
 
