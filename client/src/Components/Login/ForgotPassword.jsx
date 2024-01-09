@@ -31,7 +31,7 @@ const ForgotPassword = () => {
       console.log(response);
   
        if(response.data.success){
-        navigate("/createnewpassword")
+        navigate("/otp")
         message.success("OTP Sent Successfully")
        }
     } catch (error) {
