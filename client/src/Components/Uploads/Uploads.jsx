@@ -22,6 +22,7 @@ const Uploads = () => {
   const [videoPreviewOpen, setVideoPreviewOpen] = useState(false);
   const [videoPreviewTitle, setVideoPreviewTitle] = useState("");
   const [videoPreviewImage, setVideoPreviewImage] = useState("");
+  const [video,setVideo] = useState("")
   const videoRef = React.useRef(null);
 
   const [image, setImage] = useState({});
@@ -98,10 +99,30 @@ const Uploads = () => {
     }
   };
 
-  const handleVideoSubmit = async()=>{
-     console.log(videoFileList);
-  }
-
+  // const handleVideoSubmit = async () => {
+  //   try {
+  //     // Make sure videoFileList is defined and contains at least one file
+  //     if (!videoFileList || videoFileList.length === 0) {
+  //       console.error("No video selected.");
+  //       return;
+  //     }
+  
+  //     console.log(videoFileList[0].originFileObj);
+  //     const video = videoFileList[0].originFileObj;
+  
+  //     const formData = new FormData();
+  //     formData.append("video", video);
+  
+  //     console.log([...formData]);
+  
+  //     const { data } = await axios.post("http://localhost:8080/api/v1/videoUpload/upload-video", formData);
+  
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error uploading video:", error);
+  //   }
+  // };
+  
   return (
     <div>
       <SideBar>
@@ -185,9 +206,22 @@ const Uploads = () => {
                 src={videoPreviewImage}
               />
             </Modal>
-            <Button type="primary" htmlType="submit" onClick={handleVideoSubmit}>
+        
+            <Button type="primary" htmlType="submit">   {/*  onClick={handleVideoSubmit}  */}
               Submit Videos
             </Button>
+        
+          <br /> <br />
+        
+          {/* <input 
+            type="file" 
+            onClick={handleVideoSubmit} 
+            onChange={(e)=>setVideo(e.target.files[0])}
+            
+            />
+
+            <button onClick={handleVideoSubmit}>click</button> */}
+
           </Form.Item>
         </Form>
       </SideBar>
