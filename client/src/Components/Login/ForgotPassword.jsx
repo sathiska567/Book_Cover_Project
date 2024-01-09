@@ -84,7 +84,7 @@ const ForgotPassword = () => {
                 type="primary"
                 className={ForgetPasswordStyles.ForgetPasswordFormButton}
                 htmlType="submit"
-                href="/createnewpassword"
+                href="/otp"
               >
                 NEXT
               </Button>

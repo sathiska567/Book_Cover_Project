@@ -14,6 +14,8 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 // import Requests from "./Components/Requests/RequestsForm";
 import UserWebSite from "./Components/UserWebSite/UserWebSite";
 import Gallery from "./Components/UserWebSite/Gallery";
+import OTP from "./Components/Login/EnterOTP.jsx";
+
 
 
 function App() {
@@ -101,6 +103,11 @@ function App() {
       <Routes>
         <Route path="/gallery" element={<Gallery />} />
       </Routes>
+      <Routes>
+        <Route path="/otp" element={<OTP />} />
+      </Routes>
+
+
     </BrowserRouter>
   );
 }
