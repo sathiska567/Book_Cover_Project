@@ -1,14 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import ForgetPasswordStyles from "./ForgotPassword.module.css";
-<<<<<<< HEAD
-import { Button, Form, Input } from "antd";
-=======
 import { Button, Form, Input, message } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import axios  from 'axios';
 import { useNavigate } from 'react-router-dom';
->>>>>>> d8ec5487b7f2779a177a55d9204af1d7cb9a1a8c
+
 
 const ForgotPassword = () => {
   // State to confirm password
