@@ -1,11 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import ForgetPasswordStyles from "./ForgotPassword.module.css";
+<<<<<<< HEAD
 import { Button, Form, Input } from "antd";
+=======
+import { Button, Form, Input, message } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
+>>>>>>> d8ec5487b7f2779a177a55d9204af1d7cb9a1a8c
 
 const ForgotPassword = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [otpSendEmail , setOtpSendEmail] = useState("")
+  const navigate = useNavigate();
 
   // State to manage password visibility
   const [visible, setVisible] = useState(false);
@@ -18,6 +27,21 @@ const ForgotPassword = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+
+  const handleSendEmail = async()=>{
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/forgottenPassword/sendOTP",{email:otpSendEmail})
+      console.log(response);
+  
+       if(response.data.success){
+        navigate("/createnewpassword")
+        message.success("OTP Sent Successfully")
+
+       }
+    } catch (error) {
+       message.error("Found Error in Send OTP")
+    }
+  }
 
   return (
     <div>
@@ -79,6 +103,7 @@ const ForgotPassword = () => {
                   className="ForgetPasswordInput"
                   id="email"
                   name="email"
+                  onChange={(e) => setOtpSendEmail(e.target.value)}
                 />
               </Form.Item>
 
@@ -87,6 +112,7 @@ const ForgotPassword = () => {
                 className={ForgetPasswordStyles.ForgetPasswordFormButton}
                 htmlType="submit"
                 href="/otp"
+                onClick={handleSendEmail}
               >
                 NEXT
               </Button>
