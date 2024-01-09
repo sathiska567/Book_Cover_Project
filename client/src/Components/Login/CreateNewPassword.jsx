@@ -30,7 +30,9 @@ const CreateNewPassword = () => {
   return (
     <div>
       <div className={CreateNewPasswordStyles.NewPasswordContainer}>
-        <div className={CreateNewPasswordStyles.FormContainer}>
+        <div
+          className={`${CreateNewPasswordStyles.FormContainer} ${CreateNewPasswordStyles.formContainerMobile}`}
+        >
           <div className={CreateNewPasswordStyles.NewPasswordFormHeader}>
             <img
               src="e.png"
@@ -127,6 +129,7 @@ const CreateNewPassword = () => {
             </Button>
           </Form>
           <p
+            className={CreateNewPasswordStyles.NewPasswordFormFooter}
             style={{
               letterSpacing: "0.2px",
               fontSize: "13px",
@@ -140,8 +143,12 @@ const CreateNewPassword = () => {
           </p>
         </div>
 
-        <div className={CreateNewPasswordStyles.ImageContainer}>
+        <div
+          className={`${CreateNewPasswordStyles.ImageContainer} ${CreateNewPasswordStyles.hideOnMobile}`}
+        >
           <img
+            
+            className={CreateNewPasswordStyles.NewPasswordImage}
             src="/c.jpg"
             alt="NewPasswordImage"
             style={{

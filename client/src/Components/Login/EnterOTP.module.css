@@ -1,0 +1,64 @@
+.EnterOTPContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.EnterOTPContainer > :first-child {
+    flex: 1;
+}
+
+.EnterOTPContainer > :last-child {
+    flex: 3;
+}
+
+.profileIcon {
+    margin: 30px 30px 30px 30px;
+    padding: 10px;
+    width: 60px;
+    height: 60px; 
+    border-radius: 50%;
+    border: 2px solid #C8C8C8;
+    object-fit: cover; 
+}
+
+.EnterOTPFormHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.EnterOTPFormTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5A5A5A;
+    margin-bottom: 0px;
+}
+
+.EnterOTPFormSubTitle {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 200;
+    color: #666666;
+}
+
+.EnterOTPFormButton {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 0px;
+    width: 100%;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 14px;
+
+    text-transform: uppercase;
+}
+
+.EnterOTPLabel {
+    font-family: 'Roboto', sans-serif;
+    color: #666666;
+}
