@@ -86,7 +86,6 @@ const Login = () => {
                     message: "Please input your email!",
                   },
                 ]}
-                
               >
                 <Input
                   type="email"
@@ -176,20 +175,23 @@ const Login = () => {
             </Form>
           </>
           <p
+            className={LoginStyles.Copyright}
             style={{
               letterSpacing: "0.2px",
               fontSize: "13px",
               position: "fixed",
               textAlign: "center",
               bottom: "0",
-              left: "4%",
+              marginLeft: "3%",
+              marginRight: "4%",
             }}
           >
             Copyright &copy;2024 Design by CodeVanguard
           </p>
         </div>
-
-        <div className={LoginStyles.ImageContainer}>
+        <div
+          className={`${LoginStyles.ImageContainer} ${LoginStyles.hideOnMobile}`}
+        >
           <img
             src="/c.jpg"
             alt="LoginImage"

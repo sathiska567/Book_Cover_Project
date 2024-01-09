@@ -239,20 +239,23 @@ const handleSubmit = async()=>{
             </Form>
           </>
           <p
+            className={SignupStyles.Copyright}
             style={{
               letterSpacing: "0.2px",
               fontSize: "13px",
               position: "fixed",
               textAlign: "center",
               bottom: "0%",
-              left: "4%",
+              marginLeft: "3%",
+              marginRight: "4%",
             }}
           >
             Copyright &copy;2024 Design by CodeVanguard
           </p>
         </div>
-
-        <div className={SignupStyles.ImageContainer}>
+        <div
+          className={`${SignupStyles.ImageContainer} ${SignupStyles.hideOnMobile}`}
+        >
           <img
             src="/c.jpg"
             alt="LoginImage"
