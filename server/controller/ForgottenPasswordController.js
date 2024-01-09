@@ -1,11 +1,17 @@
 const nodemailer = require("nodemailer");
+const adminModel = require("../model/adminModel");
 
 const forgottenPasswordController = async (req, res) => {
     try {
         const { email } = req.body;
 
         const otp = Math.floor(1000 + Math.random() * 9000);
-        console.log(otp);        
+        console.log(otp);      
+        
+        const user = await adminModel.findOne({ email });
+        user.otp = otp;
+
+        await user.save();
 
         const mailTransporter = nodemailer.createTransport({
             service: 'gmail',
