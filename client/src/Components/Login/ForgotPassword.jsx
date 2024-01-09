@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 const ForgotPassword = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [otpSendEmail , setOtpSendEmail] = useState("")
+  const navigate = useNavigate();
 
 
   // State to manage password visibility
@@ -22,8 +24,6 @@ const ForgotPassword = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
-
-
 
   return (
     <div>
@@ -85,6 +85,7 @@ const ForgotPassword = () => {
                   className="ForgetPasswordInput"
                   id="email"
                   name="email"
+                  onChange={(e) => setOtpSendEmail(e.target.value)}
                 />
               </Form.Item>
 
