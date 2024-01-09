@@ -99,7 +99,7 @@ const Uploads = () => {
   };
 
   const handleVideoSubmit = async()=>{
-    
+    console.log("Clickd video submit btn");
   }
 
   return (
