@@ -85,6 +85,10 @@ const ForgotPassword = () => {
                 className={ForgetPasswordStyles.ForgetPasswordFormButton}
                 htmlType="submit"
                 href="/otp"
+<<<<<<< HEAD
+=======
+                onClick={handleSendEmail}
+>>>>>>> b3cbbc8ab7e79c5543665fffceb71f41023cce0b
               >
                 NEXT
               </Button>
