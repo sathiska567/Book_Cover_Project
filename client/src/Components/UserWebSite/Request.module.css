@@ -1,0 +1,53 @@
+.reqContainer {
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+    height: 100%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+}
+
+.reqImage {
+    flex: 1;
+    width: 50%;
+    height: 70vh ;
+    background-color: white;
+    border-left: 2px solid #ccc;
+    padding-left: 25px;
+}
+
+.reqForm {
+    flex: 2;
+}
+
+
+@media screen and (max-width: 768px) {
+    .reqContainer {
+        flex-direction: column;
+        width: 95vw;
+        margin: 0 auto;
+        margin-top: 5vh;
+        height: 70vh !important;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        padding : 0px !important;
+        padding-top: 25px !important;
+    }
+
+    Form {
+        width: 100%;
+        padding: 5px 0px   5px 0px !important;
+
+    }
+    .reqImage {
+        display: none;
+    }
+    .reqForm {
+        flex: 1;
+    }
+}
