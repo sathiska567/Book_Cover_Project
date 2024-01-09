@@ -4,14 +4,11 @@ const nodemailer = require("nodemailer");
 const forgottenPasswordController = async (req, res) => {
     try {
 
-   let testAccount = await nodemailer.createTestAccount();
-
-   const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+   const mailTransporter = nodemailer.createTransport({
+        service:"gmail",
         auth: {
-            user: 'walton.batz85@ethereal.email',
-            pass: 'Rr2k53VQCWFxGZzawh'
+            user: 'bookcovertest@gmail.com',
+            pass: 'testBook@1234'
         }
     });
 
