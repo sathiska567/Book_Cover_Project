@@ -12,9 +12,6 @@ import CreateNewPassword from "./Components/Login/CreateNewPassword";
 import PublicRoute from "./Components/PublicRoute/PublicRoute";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 // import Requests from "./Components/Requests/RequestsForm";
-// import UserWebSite from "./Components/UserWebSite/UserWebSite";
-// import Gallery from "./Components/UserWebSite/Gallery";
-
 
 function App() {
   return (
@@ -81,6 +78,8 @@ function App() {
           <ProtectedRoute>
             <RequestTable />
           </ProtectedRoute>
+
+
         } />
       </Routes>
 
@@ -92,13 +91,6 @@ function App() {
           </ProtectedRoute>
         } />
       </Routes>
-
-      {/* <Routes>
-        <Route path="/user" element={<UserWebSite />} />
-      </Routes>
-      <Routes>
-        <Route path="/gallery" element={<Gallery />} />
-      </Routes> */}
     </BrowserRouter>
   );
 }
