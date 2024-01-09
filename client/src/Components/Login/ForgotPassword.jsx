@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const ForgotPassword = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [otpSendEmail,setOtpSendEmail] = useState("")
-  const navigate = useNavigate();
+
 
   // State to manage password visibility
   const [visible, setVisible] = useState(false);
@@ -24,21 +23,7 @@ const ForgotPassword = () => {
     console.log("Received values of form: ", values);
   };
 
-  const handleSendEmail = async()=>{
-    try {
 
-      const response = await axios.post("http://localhost:8080/api/v1/forgottenPassword/sendOTP",{email:otpSendEmail});
-      console.log(response);
-  
-       if(response.data.success){
-        message.success("OTP sent successfully");
-           navigate("/otp")
-       }
-      
-    } catch (error) {
-      message.error("Error sending OTP");
-    }
-  }
 
   return (
     <div>
@@ -100,7 +85,6 @@ const ForgotPassword = () => {
                   className="ForgetPasswordInput"
                   id="email"
                   name="email"
-                  onChange={(e)=>setOtpSendEmail(e.target.value)}
                 />
               </Form.Item>
 
