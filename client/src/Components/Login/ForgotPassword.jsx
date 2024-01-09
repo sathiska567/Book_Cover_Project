@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import ForgetPasswordStyles from "./ForgotPassword.module.css";
 import { Button, Form, Input, message } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import axios  from 'axios';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
 import { Button, Form, Input } from "antd";
+>>>>>>> 24bcb8c03be45d80e25c1a0d9e7b32c854eb60b0
 
 
 const ForgotPassword = () => {
