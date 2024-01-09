@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import ForgetPasswordStyles from "./ForgotPassword.module.css";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input } from "antd";
+
 
 const ForgotPassword = () => {
   // State to confirm password
@@ -32,16 +36,19 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <div 
-          className={ForgetPasswordStyles.ForgetPasswordFormTitle}>
+          <div className={ForgetPasswordStyles.ForgetPasswordFormTitle}>
             <h3>Forgot your password?</h3>
           </div>
-          <div 
-          style={{
-            marginBottom: "50px",
-          }}
-          className={ForgetPasswordStyles.ForgetPasswordFormSubTitle}>
-            <p>Enter your username and we’ll help you <br/>reset your password.</p>
+          <div
+            style={{
+              marginBottom: "50px",
+            }}
+            className={ForgetPasswordStyles.ForgetPasswordFormSubTitle}
+          >
+            <p>
+              Enter your username and we’ll help you <br />
+              reset your password.
+            </p>
           </div>
           <>
             <Form
@@ -85,26 +92,26 @@ const ForgotPassword = () => {
                 className={ForgetPasswordStyles.ForgetPasswordFormButton}
                 htmlType="submit"
                 href="/otp"
-<<<<<<< HEAD
-=======
                 onClick={handleSendEmail}
->>>>>>> b3cbbc8ab7e79c5543665fffceb71f41023cce0b
               >
                 NEXT
               </Button>
               <div
+                className={ForgetPasswordStyles.ForgetPasswordLink}
                 style={{
                   whiteSpace: "nowrap",
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "17px",
                   textAlign: "center",
                   position: "relative",
-                  top: "180px",
+                  top: "35vh",
                 }}
               >
-
                 <a
-                className="ForgetPasswordLink"
+                  className="ForgetPasswordLink"
+                  style={{
+                    textDecoration: "none",
+                  }}
                   href="/login"
                 >
                   Sign In
@@ -113,20 +120,24 @@ const ForgotPassword = () => {
             </Form>
           </>
           <p
+            className={ForgetPasswordStyles.Copyright}
             style={{
               letterSpacing: "0.2px",
               fontSize: "13px",
               position: "fixed",
               textAlign: "center",
               bottom: "0",
-              left: "4%",
+              marginLeft: "3%",
+              marginRight: "4%",
             }}
           >
             Copyright &copy;2024 Design by CodeVanguard
           </p>
         </div>
 
-        <div className={ForgetPasswordStyles.ImageContainer}>
+        <div
+          className={`${ForgetPasswordStyles.ImageContainer} ${ForgetPasswordStyles.hideOnMobile}`}
+        >
           <img
             src="/c.jpg"
             alt="ForgetPasswordImage"

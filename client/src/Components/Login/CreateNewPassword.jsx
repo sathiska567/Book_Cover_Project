@@ -129,14 +129,15 @@ const CreateNewPassword = () => {
             </Button>
           </Form>
           <p
-            className={CreateNewPasswordStyles.NewPasswordFormFooter}
+            className={CreateNewPasswordStyles.Copyright}
             style={{
               letterSpacing: "0.2px",
               fontSize: "13px",
               position: "fixed",
               textAlign: "center",
               bottom: "0",
-              left: "4%",
+              marginLeft: "3%",
+              marginRight: "4%",
             }}
           >
             Copyright &copy;2024 Design by CodeVanguard

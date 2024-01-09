@@ -22,79 +22,91 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        } />
-      </Routes>
-
-
-      <Routes>
-        <Route path="/signup" element={
-          <PublicRoute>
-            <Signup />
-          </PublicRoute>
-        } />
-      </Routes>
-
-
-      <Routes>
-        <Route path="/forgetpassword" element={
-          <PublicRoute>
-            <ForgetPassword />
-          </PublicRoute>
-
-
-        } />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
       </Routes>
 
       <Routes>
-        <Route path="/createnewpassword" element={
-          <PublicRoute>
-            <CreateNewPassword />
-          </PublicRoute>
-
-
-        } />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        />
       </Routes>
 
       <Routes>
-        <Route path="/createEvent" element={
-          <ProtectedRoute>
-            <CreateEvent />
-          </ProtectedRoute>
-
-        } />
+        <Route
+          path="/forgetpassword"
+          element={
+            <PublicRoute>
+              <ForgetPassword />
+            </PublicRoute>
+          }
+        />
       </Routes>
 
-
       <Routes>
-        <Route path="/uploads" element={
-          <ProtectedRoute>
-            <Uploads />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/createnewpassword"
+          element={
+            <PublicRoute>
+              <CreateNewPassword />
+            </PublicRoute>
+          }
+        />
       </Routes>
 
-
       <Routes>
-        <Route path="/requests" element={
-          <ProtectedRoute>
-            <RequestTable />
-          </ProtectedRoute>
-
-
-        } />
+        <Route
+          path="/createEvent"
+          element={
+            <ProtectedRoute>
+              <CreateEvent />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
+      <Routes>
+        <Route
+          path="/uploads"
+          element={
+            <ProtectedRoute>
+              <Uploads />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
 
       <Routes>
-        <Route path="/comments" element={
-          <ProtectedRoute>
-            <CommentTable />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/requests"
+          element={
+            <ProtectedRoute>
+              <RequestTable />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+
+      <Routes>
+        <Route
+          path="/comments"
+          element={
+            <ProtectedRoute>
+              <CommentTable />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Routes>
@@ -107,7 +119,16 @@ function App() {
         <Route path="/otp" element={<OTP />} />
       </Routes>
 
-
+      <Routes>
+        <Route
+          path="/comments"
+          element={
+            
+              <CommentTable />
+          
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
