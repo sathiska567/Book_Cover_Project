@@ -15,7 +15,9 @@ const loginRoute = require("./routes/loginRoute.js")
 const videoUploadRoute = require("./routes/uploadVideoRoute.js")
 const forgottenPasswordRoute = require("./routes/forgottenPasswordRoute.js")
 const validateOtpRoute = require("./routes/validateOtpRoute.js")
-const changePasswordRoute = require("./routes/changePasswordRoute.js")
+const changePasswordRoute = require("./routes/changePasswordRoute.js");
+const requestRoute  = require("./routes/requestRoute.js");
+const deleteRoute = require("./routes/deleteRoute.js")
 
 const app = express()
 
@@ -33,6 +35,9 @@ app.use("/api/v1/loginUser",loginRoute)
 app.use("/api/v1/forgottenPassword",forgottenPasswordRoute)
 app.use("/api/v1/validate",validateOtpRoute)
 app.use("/api/v1/reset",changePasswordRoute)
+app.use("/api/v1/request",requestRoute)
+app.use("/api/v1/delete",deleteRoute)
+
 
 const PORT = process.env.PORT || 5050 ;
 
