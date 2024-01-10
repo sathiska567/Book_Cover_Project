@@ -35,10 +35,17 @@ const Login = () => {
             if(response.data.success){
             const token = response.data.token;
             localStorage.setItem("token", token);
-            // console.log(response.data);
+            console.log(response.data.admin.isAdmin);
+            console.log(response.data.admin.isAdmin);
+
+            if(response.data.admin.isAdmin){
+              navigate("/createEvent")
+            }
+            else{
+              navigate("/review")
+            }
 
             message.success("Login Successfull");
-            navigate("/createEvent")
 
             }
 
@@ -49,7 +56,7 @@ const Login = () => {
           } catch (error) {
              message.error("Please Enter Correct credential");
           }
-  }
+  } 
 
   return (
     <div>

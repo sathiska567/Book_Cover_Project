@@ -13,6 +13,8 @@ import {
   BellOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme, Space, Badge, Avatar, message } from "antd";
+import axios from "axios";
+import { adminMenu, userMenu } from "../../Data/data";
 
 /*----------------------For side navigation-start--------------------------*/
 const { Header, Sider, Content } = Layout;
@@ -53,13 +55,44 @@ const SideBar = ({ children }) => {
   const navigate = useNavigate();
   /*----------For change the title with navigation bar active -end-------*/
 
-  const handleSignOut = ()=>{
+  const handleSignOut = () => {
     localStorage.clear();
     navigate("/");
   }
 
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  const currentUserData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/v1/currentUser/getCurrentUser",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      setIsAdmin(response.data.user.isAdmin)
+      setUserName(response.data.user.username)
+
+    }
+    catch (error) {
+      message.error("Error occure in Fetching Current User Data")
+    }
+  }
+
+  useEffect(() => {
+    currentUserData();
+  }, [])
+
+  const MenuList = isAdmin ? adminMenu : userMenu
+  console.log(Menu);
   return (
-    <Layout
+  <>
+   
+   <Layout
       style={{
         width: "100vw",
         height: "100vh",
@@ -68,7 +101,7 @@ const SideBar = ({ children }) => {
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <div style={{ color: "white" }} className="welcome">
-          Hi{!collapsed && <span>, Admin</span>}
+          Hi{!collapsed && <span>, {userName}</span>}
         </div>
         <Menu
           theme="dark"
@@ -79,7 +112,7 @@ const SideBar = ({ children }) => {
           }}
           selectedKeys={[keyMap[location.pathname]]}
         >
-          <Menu.Item key="1" icon={<EditOutlined />}>
+          {/* <Menu.Item key="1" icon={<EditOutlined />}>
             <Link to="/createEvent"> Create Event</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<UploadOutlined />}>
@@ -103,8 +136,34 @@ const SideBar = ({ children }) => {
             }}
           >
             <Link to="/" onClick={handleSignOut}> Sign out</Link>
+          </Menu.Item> */}
+ 
+       {MenuList.map((menu)=>(
+
+          <Menu.Item key={menu.path} icon={<UploadOutlined />}>
+          <Link to={menu.path}> {menu.name}</Link>
+        </Menu.Item>
+
+       ))}
+
+        <Menu.Item
+            key="5"
+            className="signout"
+            icon={<LogoutOutlined />}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              marginLeft: "3px",
+              marginRight: "5px",
+            }}
+          >
+            <Link to="/" onClick={handleSignOut}> Sign out</Link>
           </Menu.Item>
+
+
         </Menu>
+
+     
       </Sider>
       <Layout>
         <Header
@@ -114,7 +173,9 @@ const SideBar = ({ children }) => {
           }}
         >
           <div className="HeaderButtonSet">
-            <span style={{ color: "white" }} className="notificaiton">
+            {
+              isAdmin ? 
+              <span style={{ color: "white" }} className="notificaiton">
               <a href="/comments">
                 <Space size={24}>
                   {/* Notification badge */}
@@ -128,6 +189,11 @@ const SideBar = ({ children }) => {
                 </Space>
               </a>
             </span>
+
+              :
+              
+              ""
+            }
             <span style={{ color: "white" }} className="notificaiton">
               <a href="/login">
                 <Space size={24}>
@@ -166,7 +232,11 @@ const SideBar = ({ children }) => {
           {children}
         </Content>
       </Layout>
-    </Layout>
+    </Layout> 
+      
+  
+  </>
+    
   );
 };
 export default SideBar;
