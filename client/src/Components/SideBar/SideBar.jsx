@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { React, useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./SideBar.css";
 import {
   MenuFoldOutlined,
@@ -12,7 +12,7 @@ import {
   LogoutOutlined,
   BellOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Space, Badge, Avatar } from "antd";
+import { Layout, Menu, Button, theme, Space, Badge, Avatar, message } from "antd";
 
 /*----------------------For side navigation-start--------------------------*/
 const { Header, Sider, Content } = Layout;
@@ -49,7 +49,14 @@ const SideBar = ({ children }) => {
     "/comments": "Comments",
     "/": "Home",
   };
+
+  const navigate = useNavigate();
   /*----------For change the title with navigation bar active -end-------*/
+
+  const handleSignOut = ()=>{
+    localStorage.clear();
+    navigate("/");
+  }
 
   return (
     <Layout
@@ -95,7 +102,7 @@ const SideBar = ({ children }) => {
               marginRight: "5px",
             }}
           >
-            <Link to="/login"> Sign out</Link>
+            <Link to="/" onClick={handleSignOut}> Sign out</Link>
           </Menu.Item>
         </Menu>
       </Sider>
