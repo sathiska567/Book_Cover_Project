@@ -7,66 +7,66 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 /*------------------Ant Design Table - Start------------------------*/
-const columns = [
-  {
-    title: "Organization Name",
-    dataIndex: "OrgName",
-    key: "OrgName",
-    render: (text, record) => (
-      <span>{record.nameOfOrganization}</span>
-    )
-  },
-  {
-    title: "Requester Name",
-    dataIndex: "reqName",
-    key: "reqName",
-    render: (text, record) => (
-      <span>{record.nameOfTheRequest}</span>
-    )
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
-    render: (text, record) => (
-      <span>{record.requestDescription}</span>
-    )
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (text, record) => (
-      <Space size="middle">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "10px",
-          }}
-        >
-          {/* <Button
-            className="btnView"
-            type="primary"
-            ghost
+// const columns = [
+//   {
+//     title: "Organization Name",
+//     dataIndex: "OrgName",
+//     key: "OrgName",
+//     render: (text, record) => (
+//       <span>{record.nameOfOrganization}</span>
+//     )
+//   },
+//   {
+//     title: "Requester Name",
+//     dataIndex: "reqName",
+//     key: "reqName",
+//     render: (text, record) => (
+//       <span>{record.nameOfTheRequest}</span>
+//     )
+//   },
+//   {
+//     title: "Description",
+//     dataIndex: "description",
+//     key: "description",
+//     render: (text, record) => (
+//       <span>{record.requestDescription}</span>
+//     )
+//   },
+//   {
+//     title: "Action",
+//     key: "action",
+//     render: (text, record) => (
+//       <Space size="middle">
+//         <div
+//           style={{
+//             display: "flex",
+//             flexDirection: "row",
+//             gap: "10px",
+//           }}
+//         >
+//           {/* <Button
+//             className="btnView"
+//             type="primary"
+//             ghost
            
-          >
-            View
-          </Button> */}
+//           >
+//             View
+//           </Button> */}
 
-          <Button
-            className="btnDel"
-            type="primary"
-            danger ghost
-          // onClick={handleDelete(record)}
+//           <Button
+//             className="btnDel"
+//             type="primary"
+//             danger ghost
+//           // onClick={handleDelete(record)}
 
-          >
-            Delete
-          </Button>
-        </div>
-      </Space>
-    ),
-  },
-];
+//           >
+//             Delete
+//           </Button>
+//         </div>
+//       </Space>
+//     ),
+//   },
+// ];
 
 // const data = [
 //   {
@@ -205,65 +205,6 @@ const RequestTable = () => {
 
 
 
-// {
-//   title: "Actions",
-//   dataIndex: "Actions",
-//   key: "Actions",
-//   render: (text, record) => (
-//     <span
-//       style={{
-//         display: "flex",
-//         flexDirection: "row",
-//         gap: "10px",
-//       }}
-//     >
-//       {record.status == "pending" ? (
-//         <Button
-//           type="primary"
-//           style={{
-//             backgroundColor: "#05AD1B",
-//             color: "#fff",
-//             fontSize: "14px",
-//             marginRight: "10px",
-//             borderRadius: "5px",
-//           }}
-//           onClick={() => NavigateDetailsPage(record)}
-//         >
-//           <UserOutlined />
-//           View
-//         </Button>
-//       ) : (
-//         <Button
-//           type="primary"
-//           style={{
-//             backgroundColor: "#E4A11B",
-//             color: "#fff",
-//             fontSize: "14px",
-//             marginRight: "10px",
-//             borderRadius: "5px",
-//           }}
-//           onClick={() => NavigateDetailsPage(record)}
-//         >
-//           <EditOutlined />
-//           Update
-//         </Button>
-//       )}
 
-//       <Button
-//         type="primary"
-//         style={{
-//           backgroundColor: "#D94D34",
-//           color: "#fff",
-//           fontSize: "14px",
-//           borderRadius: "5px",
-//         }}
-//         onClick={() => handleDelete(record)}
-//       >
-//         <DeleteOutlined />
-//         Delete
-//       </Button>
-//     </span>
-//   ),
-// },
 
 export default RequestTable;
