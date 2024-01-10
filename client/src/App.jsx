@@ -23,6 +23,17 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <UserWebSite/>
+            </PublicRoute>
+          }
+        />
+      </Routes>
+
+      <Routes>
+        <Route
           path="/login"
           element={
             <PublicRoute>
