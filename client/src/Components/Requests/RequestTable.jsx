@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./RequestTable.css";
 import SideBar from "../SideBar/SideBar";
-import { Space, Table, Button } from "antd";
+import { Space, Table, Button, message } from "antd";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 /*------------------Ant Design Table - Start------------------------*/
 const columns = [
@@ -10,16 +12,25 @@ const columns = [
     title: "Organization Name",
     dataIndex: "OrgName",
     key: "OrgName",
+    render: (text, record) => (
+      <span>{record.nameOfOrganization}</span>
+    )
   },
   {
     title: "Requester Name",
     dataIndex: "reqName",
     key: "reqName",
+    render: (text, record) => (
+      <span>{record.nameOfTheRequest}</span>
+    )
   },
   {
-    title: "Date",
-    dataIndex: "date",
-    key: "date",
+    title: "Description",
+    dataIndex: "description",
+    key: "description",
+    render: (text, record) => (
+      <span>{record.requestDescription}</span>
+    )
   },
   {
     title: "Action",
@@ -33,19 +44,21 @@ const columns = [
             gap: "10px",
           }}
         >
-          <Button
+          {/* <Button
             className="btnView"
             type="primary"
             ghost
            
           >
             View
-          </Button>
-          <Button 
-          className="btnDel" 
-          type="primary" 
-          danger ghost
-          
+          </Button> */}
+
+          <Button
+            className="btnDel"
+            type="primary"
+            danger ghost
+          // onClick={handleDelete(record)}
+
           >
             Delete
           </Button>
@@ -54,45 +67,203 @@ const columns = [
     ),
   },
 ];
-const data = [
-  {
-    key: "1",
-    OrgName: "ABC Pvt Ltd",
-    reqName: "John Brown",
-    date: "2024/1/1",
-  },
-  {
-    key: "2",
-    OrgName: "ABC Pvt Ltd",
-    reqName: "John Brown",
-    date: "2024/1/1",
-  },
-  {
-    key: "3",
-    OrgName: "ABC Pvt Ltd",
-    reqName: "John Brown",
-    date: "2024/1/1",
-  },
-];
- 
+
+// const data = [
+//   {
+//     key: "1",
+//     OrgName: "ABC Pvt Ltd",
+//     reqName: "John Brown",
+//     date: "2024/1/1",
+//   },
+//   {
+//     key: "2",
+//     OrgName: "ABC Pvt Ltd",
+//     reqName: "John Brown",
+//     date: "2024/1/1",
+//   },
+//   {
+//     key: "3",
+//     OrgName: "ABC Pvt Ltd",
+//     reqName: "John Brown",
+//     date: "2024/1/1",
+//   },
+// ];
+
 /*------------------Ant Design Table - End---------------------------*/
 
 
 const RequestTable = () => {
+
+  const [requestApplicationData, setRequestApplicationData] = useState([]);
+  const navigate = useNavigate();
+
+
+  const requestData = async () => {
+    const requestData = await axios.get("http://localhost:8080/api/v1/request/all-request")
+
+    if (requestData.data.success) {
+      console.log(requestData.data.request);
+      setRequestApplicationData(requestData.data.request)
+    }
+  }
+
+  const handleDelete = async(record)=>{
+     try {
+    //  console.log(record._id);
+     const deletedDataId = record._id
+     const response = await axios.post("http://localhost:8080/api/v1/delete/delete-request",{id:deletedDataId})
+    
+      if(response.data.success){
+           message.success("Deleted Successfull")
+           window.location.reload();
+      }
+
+     } catch (error) {
+        message.error("Something went wrong")
+     }
+  }
+
+
+  useEffect(() => {
+    requestData();
+  }, []);
+
 
   return (
     <div>
       <SideBar>
         <div className="customTable">
           <Table
-            columns={columns}
-            dataSource={data}
+            columns={[
+              {
+                title: "Organization Name",
+                dataIndex: "OrgName",
+                key: "OrgName",
+                render: (text, record) => (
+                  <span>{record.nameOfOrganization}</span>
+                ),
+              },
+              {
+                title: "Requester Name",
+                dataIndex: "reqName",
+                key: "reqName",
+                render: (text, record) => (
+                  <span>{record.nameOfTheRequest}</span>
+                ),
+              },
+              {
+                title: "Description",
+                dataIndex: "description",
+                key: "description",
+                render: (text, record) => (
+                  <span>{record.requestDescription}</span>
+                ),
+              },
+              {
+                title: "Action",
+                key: "action",
+                render: (text, record) => (
+                  <Space size="middle">
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "10px",
+                      }}
+                    >
+                      {/* <Button
+              className="btnView"
+              type="primary"
+              ghost
+            >
+              View
+            </Button> */}
+
+                      <Button
+                        className="btnDel"
+                        type="primary"
+                        danger
+                        ghost
+                        onClick={()=>handleDelete(record)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </Space>
+                ),
+              },
+            ]}
+            dataSource={requestApplicationData}
             pagination={{ pageSize: 6 }}
           />
+
         </div>
       </SideBar>
     </div>
   );
 };
+
+
+
+// {
+//   title: "Actions",
+//   dataIndex: "Actions",
+//   key: "Actions",
+//   render: (text, record) => (
+//     <span
+//       style={{
+//         display: "flex",
+//         flexDirection: "row",
+//         gap: "10px",
+//       }}
+//     >
+//       {record.status == "pending" ? (
+//         <Button
+//           type="primary"
+//           style={{
+//             backgroundColor: "#05AD1B",
+//             color: "#fff",
+//             fontSize: "14px",
+//             marginRight: "10px",
+//             borderRadius: "5px",
+//           }}
+//           onClick={() => NavigateDetailsPage(record)}
+//         >
+//           <UserOutlined />
+//           View
+//         </Button>
+//       ) : (
+//         <Button
+//           type="primary"
+//           style={{
+//             backgroundColor: "#E4A11B",
+//             color: "#fff",
+//             fontSize: "14px",
+//             marginRight: "10px",
+//             borderRadius: "5px",
+//           }}
+//           onClick={() => NavigateDetailsPage(record)}
+//         >
+//           <EditOutlined />
+//           Update
+//         </Button>
+//       )}
+
+//       <Button
+//         type="primary"
+//         style={{
+//           backgroundColor: "#D94D34",
+//           color: "#fff",
+//           fontSize: "14px",
+//           borderRadius: "5px",
+//         }}
+//         onClick={() => handleDelete(record)}
+//       >
+//         <DeleteOutlined />
+//         Delete
+//       </Button>
+//     </span>
+//   ),
+// },
 
 export default RequestTable;

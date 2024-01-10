@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import requestStyles from './Request.module.css';
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Request = () => {
     const [form] = Form.useForm();
     const { TextArea } = Input;
+    const [nameOfOrganization, setNameOfOrganization] = useState("");
+    const [nameOfTheRequest, setnameOfTheRequest] = useState("");
+    const [description, setDescription] = useState("");
+    // const navigate = useNavigate();
 
     const onChange = (e) => {
         console.log("Change:", e.target.value);
     };
+
+    const handleRequest = async()=>{
+      console.log(nameOfOrganization,nameOfTheRequest,description);
+
+      try {
+        const response = await axios.post("http://localhost:8080/api/v1/request/request",{nameOfOrganization:nameOfOrganization , nameOfTheRequest : nameOfTheRequest , requestDescription:description})
+
+         if(response.data.success){
+           message.success("Request Sent Successfully");
+          // navigate("/")
+         }
+
+      } catch (error) {
+        message.error("Error in sending request");
+      }
+    }
 
     return (
       <div>
@@ -38,6 +60,7 @@ const Request = () => {
                     message: "Please input the organization name!",
                   },
                 ]}
+                onChange={(e) => setNameOfOrganization(e.target.value)}
               >
                 <Input placeholder="Organization Name" />
               </Form.Item>
@@ -47,6 +70,7 @@ const Request = () => {
                 rules={[
                   { required: true, message: "Please input requester name!" },
                 ]}
+                onChange={(e) => setnameOfTheRequest(e.target.value)}
               >
                 <Input placeholder="Requester Name" />
               </Form.Item>
@@ -59,6 +83,7 @@ const Request = () => {
                     message: "Please input the request description!",
                   },
                 ]}
+                onChange={(e) => setDescription(e.target.value)}
               >
                 <TextArea
                   showCount
@@ -70,7 +95,7 @@ const Request = () => {
               </Form.Item>
               {/* Submit button */}
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={handleRequest}>
                   Submit
                 </Button>
               </Form.Item>
