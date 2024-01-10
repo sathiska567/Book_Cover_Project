@@ -1,15 +1,38 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import EnterOTPStyles from "./EnterOTP.module.css";
-import { Button, Form } from "antd";
+import { Button, Form, message } from "antd";
 import { InputOTP } from "antd-input-otp";
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const EnterOTP = () => {
   const [form] = Form.useForm();
+  const location = useLocation([]);
+  const navigate = useNavigate();
+
   // Function to handle form submission
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+  const onFinish = async(values) => {
+    
+      try {
+
+           console.log("Received values of form: ", values);
+           const result = values.otp.join('');
+           console.log(result);
+           const email = location.state.email;
+
+           const response = await axios.post("http://localhost:8080/api/v1/validate/valide-otp",{email:email , otp:result})
+           console.log(response);
+
+           if(response.data.success){
+                message.success("OTP Verified Successfully")
+                navigate("/createnewpassword" , {state : {email:email}})
+           }
+
+      } catch (error) {
+        message.error("Invalide OTP.Again Please Check your OTP")
+      }
+};
 
   return (
     <div>
@@ -46,14 +69,15 @@ const EnterOTP = () => {
               onFinish={onFinish}
             >
               <Form.Item name="otp">
-                <InputOTP autoSubmit={form} inputType="numeric" length={4} />
+                <InputOTP autoSubmit={form} inputType="numeric" length={4}/>
               </Form.Item>
 
               <Button
                 type="primary"
                 className={EnterOTPStyles.EnterOTPFormButton}
                 htmlType="submit"
-                href="/createnewpassword"
+                // href="/createnewpassword"
+                // onClick={verifyOTP}
               >
                 NEXT
               </Button>

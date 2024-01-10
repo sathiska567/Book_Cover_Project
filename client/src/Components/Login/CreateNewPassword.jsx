@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import CreateNewPasswordStyles from "./CreateNewPassword.module.css";
 import { Button, Form, Input, message } from "antd";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CreateNewPassword = () => {
   // Set the maximum number of messages when the component mounts
@@ -14,6 +16,8 @@ const CreateNewPassword = () => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Function to handle form submission
   const onFinish = (values) => {
@@ -26,6 +30,26 @@ const CreateNewPassword = () => {
       return;
     }
   };
+
+
+  const changePassword = async(e) => {
+     try {
+       console.log(location);
+       const email = location.state.email;
+       const response = await axios.post("http://localhost:8080/api/v1/reset/change-password",{email:email , password:password})
+       if(response.data.success){
+           message.success("Password changed successfully!");
+           navigate("/login")
+       }
+
+       else{
+        message.error(response.data.message)
+       }
+      
+     } catch (error) {
+        message.error("Error changing password!");
+     }
+  }
 
   return (
     <div>
@@ -123,7 +147,8 @@ const CreateNewPassword = () => {
               }}
               type="primary"
               className={CreateNewPasswordStyles.NewPasswordFormButton}
-              htmlType="submit"
+              // htmlType="submit"
+              onClick={changePassword}
             >
               RESET PASSWORD
             </Button>
