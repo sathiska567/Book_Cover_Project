@@ -364,6 +364,38 @@ body {
   }
 }
 /*--------------------YouAuthortube Styles Mobile-end--------------*/
+/*--------------------Review Styles Desktop-start--------------*/
+.ReviewContainer {
+  width: 100vw;
+  height: 105vh;
+}
+
+.ReviewTitle {
+  font-size: 56px;
+  font-weight: bold;
+  margin: 30px 40px 40px 40px;
+}
+
+.ReviewTitle::first-letter {
+  border-bottom: 5px solid rgba(67, 56, 202, 0.4);
+}
+
+/*--------------------Review Styles Desktop-end--------------*/
+/*--------------------Review Styles Mobile-start--------------*/
+
+@media (max-width: 767px) {
+  .ReviewContainer {
+    width: 100vw;
+    height: 166vh;
+  }
+
+  .ReviewTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 30px;
+  }
+}
+/*--------------------Review Styles Mobile-end--------------*/
 
 /*--------------------Footer Styles Desktop-start--------------*/
 .FooterContainer {
@@ -486,6 +518,7 @@ body {
   }
 }
 /*--------------------Footer Styles Mobile-end--------------*/
+
 
 /*--------------------copyright Styles Desktop-start--------------*/
 .copyright {

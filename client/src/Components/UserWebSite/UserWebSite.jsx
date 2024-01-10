@@ -13,6 +13,7 @@ import Gallery from "./Gallery";
 import Request from "./Request";
 import YoutubeWidget from "./YoutubeWidget";
 import Author from "./Author";
+import Review from "./Review";
 import { Button } from "antd";
 import { SocialIcon } from "react-social-icons";
 import "react-social-icons/vimeo";
@@ -58,7 +59,7 @@ const UserWebSite = () => {
                 <Nav.Link className={userStyles.NavLink} href="#YouTubeWidget">
                   YouTube Channel
                 </Nav.Link>
-                <Nav.Link className={userStyles.NavLink} href="#link">
+                <Nav.Link className={userStyles.NavLink} href="#Review">
                   Reviews
                 </Nav.Link>
                 <Nav.Link className={userStyles.NavLink} href="#Author">
@@ -177,6 +178,13 @@ const UserWebSite = () => {
         </div>
       </div>
 
+      <div id="Review" className={userStyles.ReviewContainer}>
+        <h1 className={userStyles.ReviewTitle}>Voice of Readers</h1>
+        <div className={userStyles.Review}>
+          <Review />
+        </div>
+      </div>
+
       <div id="Author" className={userStyles.AuthorContainer}>
         <h1 className={userStyles.AuthorTitle}>About Author</h1>
         <div className={userStyles.Author}>
@@ -200,7 +208,7 @@ const UserWebSite = () => {
             <a href="#Gallery">Gallery</a>
             <a href="#Request">Request Reading</a>
             <a href="#YouTubeWidget">YouTube Channel</a>
-            <a href="">Reviews</a>
+            <a href="#Review">Reviews</a>
             <a href="#Author">About Author</a>
             <Button
               type="primary"
@@ -224,7 +232,7 @@ const UserWebSite = () => {
             <a href="#Gallery">Gallery</a>
             <a href="#Request">Request Reading</a>
             <a href="#YouTubeWidget">YouTube Channel</a>
-            <a href="">Reviews</a>
+            <a href="#Review">Reviews</a>
             <a href="#Author">About Author</a>
             <Button
               type="primary"
