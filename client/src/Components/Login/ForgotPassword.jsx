@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ForgetPasswordStyles from "./ForgotPassword.module.css";
 import { Button, Form, Input, message } from "antd";
 import axios  from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const ForgotPassword = () => {
@@ -11,6 +11,7 @@ const ForgotPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [otpSendEmail , setOtpSendEmail] = useState("")
   const navigate = useNavigate();
+  const location = useLocation([]);
 
 
   // State to manage password visibility
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
       console.log(response);
   
        if(response.data.success){
-        navigate("/otp")
+        navigate("/otp",{state : {email:otpSendEmail}})
         message.success("OTP Sent Successfully")
        }
     } catch (error) {
