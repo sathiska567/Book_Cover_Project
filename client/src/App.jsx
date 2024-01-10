@@ -15,6 +15,7 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import UserWebSite from "./Components/UserWebSite/UserWebSite";
 import Gallery from "./Components/UserWebSite/Gallery";
 import OTP from "./Components/Login/EnterOTP.jsx";
+import Review from "./Components/Review/Review.jsx";
 
 
 
@@ -123,6 +124,11 @@ function App() {
       <Routes>
         <Route path="/user" element={<UserWebSite />} />
       </Routes>
+
+      <Routes>
+        <Route path="/review" element={<Review/>} />
+      </Routes>
+
       <Routes>
         <Route path="/gallery" element={<Gallery />} />
       </Routes>
