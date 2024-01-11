@@ -136,7 +136,7 @@ function App() {
         <Route path="/otp" element={<OTP />} />
       </Routes>
 
-      <Routes>
+      {/* <Routes>
         <Route
           path="/comments"
           element={
@@ -145,7 +145,7 @@ function App() {
           
           }
         />
-      </Routes>
+      </Routes> */}
     </BrowserRouter>
   );
 }
