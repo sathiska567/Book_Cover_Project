@@ -112,7 +112,7 @@ const SideBar = ({ children }) => {
           }}
           selectedKeys={[keyMap[location.pathname]]}
         >
-          {/* <Menu.Item key="1" icon={<EditOutlined />}>
+          <Menu.Item key="1" icon={<EditOutlined />}>
             <Link to="/createEvent"> Create Event</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<UploadOutlined />}>
@@ -136,15 +136,15 @@ const SideBar = ({ children }) => {
             }}
           >
             <Link to="/" onClick={handleSignOut}> Sign out</Link>
-          </Menu.Item> */}
+          </Menu.Item>
  
-       {MenuList.map((menu)=>(
+       {/* {MenuList.map((menu)=>(
 
           <Menu.Item key={menu.path} icon={<UploadOutlined />}>
           <Link to={menu.path}> {menu.name}</Link>
         </Menu.Item>
 
-       ))}
+       ))} */}
 
         <Menu.Item
             key="5"

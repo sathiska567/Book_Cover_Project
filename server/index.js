@@ -19,6 +19,7 @@ const changePasswordRoute = require("./routes/changePasswordRoute.js");
 const requestRoute  = require("./routes/requestRoute.js");
 const deleteRoute = require("./routes/deleteRoute.js") 
 const currentUserRoute = require("./routes/currentUserRoute.js")
+const reviewRoute = require("./routes/reviewRoute.js")
 
 const app = express()
 
@@ -39,6 +40,7 @@ app.use("/api/v1/reset",changePasswordRoute)
 app.use("/api/v1/request",requestRoute)
 app.use("/api/v1/delete",deleteRoute)
 app.use("/api/v1/currentUser",currentUserRoute)
+app.use("/api/v1/review",reviewRoute)
 
 
 const PORT = process.env.PORT || 5050 ;

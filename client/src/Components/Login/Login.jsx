@@ -42,7 +42,8 @@ const Login = () => {
               navigate("/createEvent")
             }
             else{
-              navigate("/review")
+              // message.success("/user")
+              navigate("/user")
             }
 
             message.success("Login Successfull");
@@ -156,7 +157,7 @@ const Login = () => {
               <Button
                 type="primary"
                 className={LoginStyles.LoginFormButton}
-                htmlType="submit"
+                // htmlType="submit"
                 onClick={handleLogin}
               >
                 Sign In
