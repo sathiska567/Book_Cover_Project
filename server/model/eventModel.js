@@ -20,7 +20,7 @@ const CreateEventSchema = new mongoose.Schema({
  EventDescription: {
     type:String,
     required : [true , "Event Description is required"]
- },
+ }
 
 })
 

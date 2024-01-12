@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,14 +14,52 @@ import Request from "./Request";
 import YoutubeWidget from "./YoutubeWidget";
 import Author from "./Author";
 import Review from "./Review";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { SocialIcon } from "react-social-icons";
 import "react-social-icons/vimeo";
 import "react-social-icons/meetup";
+import axios from "axios";
 
 const UserWebSite = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+  const [imgUrl , setImgUrl] = useState("")
+  const [eventName,setEventName] = useState("")
+  const [eventDate,setEventDate] = useState("")
+  const [eventDescription,setEventDescription] = useState("")
+  const [location,setLocation] = useState("")
+
+  const getCoverImage = async()=>{
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/coverUpload/get-cover-image")
+        console.log(response.data.imgData[0].coverimgUrl);
+        setImgUrl(response.data.imgData[0].coverimgUrl)
+        
+      } catch (error) {
+        message.error("Cover Image Fetch have error")
+      }    
+  }
+
+  const getEventDetails = async()=>{
+    try {
+
+      const response = await axios.get("http://localhost:8080/api/v1/event/get-create-event")
+      console.log(response.data.data[0]);
+      setEventName(response.data.data[0].EventName)
+      setEventDescription(response.data.data[0].EventDescription)
+      setEventDate(response.data.data[0].EventDate)
+      setLocation(response.data.data[0].EventLocation)
+
+    } catch (error) {
+      message.error("Event data fetched have an error")
+    }
+  }
+
+  useEffect(()=>{
+    getCoverImage();
+    getEventDetails()
+  })
+
 
   return (
     <div className={userStyles.Container}>
@@ -130,22 +168,16 @@ const UserWebSite = () => {
       <div id="#" className={userStyles.EventContainer}>
         <div className={userStyles.Event}>
           <div className={userStyles.EventImage}>
-            <img src="./e.jpg" alt="event" className={userStyles.EventImage} />
+            <img src={imgUrl} alt="event" className={userStyles.EventImage} />
             <div className={userStyles.EventText}>
-              <h1 className={userStyles.eventName}>Once Upon a Playtime</h1>
+              <h1 className={userStyles.eventName}>{eventName}</h1>
               <p className={userStyles.eventDescription}>
-                Join us for a magical journey as we unveil the enchanting world
-                of [Book Title]! "Once Upon a Playtime" invites families and
-                little adventurers to a whimsical celebration filled with
-                laughter, imagination, and joy. The event promises delightful
-                surprises, interactive storytelling, and playful activities that
-                will transport children into the heart of the story. Come be a
-                part of this enchanting day where the pages come to life, andter
-                stage. Get ready for a
+                {eventDescription}
               </p>
-              <h1 className={userStyles.eventDate}>January</h1>
+              <h5 className={userStyles.eventDate}>{eventDate}</h5>
               <h1 className={userStyles.eventDate}>
-                07 <sup>th</sup>{" "}
+                {/* 07 <sup>th</sup>{" "} */}
+                {location}
               </h1>
             </div>
           </div>

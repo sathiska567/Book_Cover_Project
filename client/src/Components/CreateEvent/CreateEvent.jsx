@@ -67,7 +67,7 @@ const CreateEvent = () => {
 
        
       // Step 1: Create the event without the image
-      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
+      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/update-event", {
         EventName: values.eventName,
         EventLocation: values.eventLocation,
         EventDescription: values.eventDescription,
@@ -86,7 +86,7 @@ const CreateEvent = () => {
       console.log([...formData]);
   
       const coverImageRes = await axios.post(
-        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+        "http://localhost:8080/api/v1/coverUpload/update-cover-image-upload",
         formData,
         {
           headers: {
@@ -227,7 +227,7 @@ const CreateEvent = () => {
           {/* Submit button */}
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              Update
             </Button>
           </Form.Item>
         </Form>
