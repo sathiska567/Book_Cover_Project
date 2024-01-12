@@ -16,6 +16,7 @@ const Gallery = () => {
   we need to use the window width to determine how many slides to show. */
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [galleryImages,setGalleryImages] = useState([]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -58,11 +59,17 @@ const Gallery = () => {
     speed: 600,
   };
 
+  const img = [];
 
   const galleryAllImages = async()=>{
       try {
         const response = await axios.get("http://localhost:8080/api/v1/upload/get-images")
-        console.log(response);
+        console.log(response.data.images);
+        setGalleryImages(response.data.images)
+
+        for (let i = 0; i < response.data.images.length; i++) {
+             img[i] = response.data.images[i];
+        }
         
       } catch (error) {
         message.error("Erro Found in fetching images")
@@ -132,7 +139,27 @@ const Gallery = () => {
         >
           <img src={img5} alt="Slide 5" style={imgStyle} />
         </div>
+
+        {/* {galleryImages.map((images)=>(
+           <div
+           style={{
+             display: "flex",
+             justifyContent: "center",
+             alignItems: "center",
+             height: "100%",
+           }}
+         >
+           <img src={images.imageUrl} alt="Slide" style={imgStyle} />
+         </div>
+        ))} */}
+
+
+
+
       </Swiper>
+
+
+      {/* imageUrl */}
     </div>
   );
 };

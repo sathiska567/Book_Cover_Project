@@ -12,7 +12,7 @@ const Review = () => {
   const [userName,setUserName] = useState('')
   const [review,setReview] = useState('')
 
-  const [data,setData] = useState([])
+  const [reviewData,setReviewData] = useState([])
   
   // const handleInputChange = (event) => {
   //   setReview({ ...review, [event.target.name]: event.target.value });
@@ -64,8 +64,8 @@ const Review = () => {
   const getReview = async()=>{
     try {
       const response = await axios.get("http://localhost:8080/api/v1/review/get-review")
-      console.log(response.data.review);
-      // setData(response.data.review)
+      // console.log(response.data.review);
+      setReviewData(response.data.review)
 
     } catch (error) {
       message.error("Something went wrong")
@@ -79,6 +79,8 @@ const Review = () => {
 
 
   return (
+
+    <>
     <div className={reviewStyles.reviewContainer}>
       <div className={reviewStyles.reviewButton}>
         <Button type="primary" onClick={() => setShowForm(true)}>
@@ -197,9 +199,13 @@ const Review = () => {
             ]}
           />
         </div>
+        {reviewData.map((data)=>(
+          <p>Name : {data.userName} <br /> Review : {data.review}</p>
+       ))}
       </div>
       
     </div>
+    </>
     
   );
 };

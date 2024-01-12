@@ -56,7 +56,7 @@ const UserWebSite = () => {
       setEventDescription(response.data.data[0].EventDescription)
       setEventDate(response.data.data[0].EventDate)
       setLocation(response.data.data[0].EventLocation)
-      setUserState(LocationValue.state.isAdminValue)
+      // setUserState(LocationValue.state.isAdminValue)
 
     } catch (error) {
       message.error("Event data fetched have an error")
