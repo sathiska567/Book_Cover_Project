@@ -45,4 +45,15 @@ const createEventController = async (req, res) => {
   }
 };
 
-module.exports = { createEventController };
+
+const getCreateEventController = async(req,res)=>{
+    try {
+      const data = await createEventDetailsModel.find({});
+      
+      
+    } catch (error) {
+      
+    }
+}
+
+module.exports = { createEventController,getCreateEventController };

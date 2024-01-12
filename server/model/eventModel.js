@@ -21,6 +21,13 @@ const CreateEventSchema = new mongoose.Schema({
     type:String,
     required : [true , "Event Description is required"]
  },
+ coverimgUrl:{
+   type:String
+},
+
+publicId:{
+  type:String
+}
 
 })
 

@@ -7,5 +7,4 @@ const router = express.Router();
 router.post('/sendOTP',forgottenPasswordController)
 
 
-
 module.exports = router;

@@ -1,4 +1,5 @@
 const coverImageGalleryModel = require("../model/coverImageModel");
+const eventModel = require("../model/eventModel");
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
@@ -44,4 +45,21 @@ const coverImageUploadController = async (req, res) => {
   }
 };
 
-module.exports = { coverImageUploadController };
+// GET cover image
+const getCoverImageUploadController = async(req,res)=>{
+   try {
+     const imgData = await coverImageGalleryModel.find({});
+      res.status(200).send({
+        success:true,
+        message:"All cover images",
+        imgData
+      })
+   } catch (error) {
+      res.status(200).send({
+      success:true,
+      message:"All cover images",
+       })
+   }
+}
+
+module.exports = { coverImageUploadController,getCoverImageUploadController };

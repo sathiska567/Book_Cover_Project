@@ -21,6 +21,7 @@ const CreateEvent = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [status,setStatus] = useState(false);
   const handleCancel = () => setPreviewOpen(false);
   const navigate = useNavigate();
 
@@ -75,7 +76,9 @@ const CreateEvent = () => {
       });
   
       // Log the event creation response
-      console.log("Uploaded another details" , eventResponse);
+    console.log("Uploaded another details" , eventResponse);
+
+    console.log(eventResponse.data.success);
 
 
       // Step 2: Upload the cover image
@@ -98,6 +101,10 @@ const CreateEvent = () => {
       // Log the cover image upload response
       console.log("Uploaded image details " , coverImageRes);
 
+      if(eventResponse.data.success || coverImageRes.data.success){
+         setStatus(true)
+      }
+
   
       // Display success message
       message.success("Event Created Successfully");
@@ -109,6 +116,11 @@ const CreateEvent = () => {
       message.error("Event Creation Failed");
     }
   };
+
+
+  const handleUpdate = async(values)=>{
+     console.log(values);
+  }
 
   const { TextArea } = Input;
 
@@ -225,11 +237,21 @@ const CreateEvent = () => {
             </Modal>
           </Form.Item>
           {/* Submit button */}
-          <Form.Item>
+          {
+            status ? 
+            <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
+          </Form.Item>
+           :
+
+           <Form.Item>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
+          }
         </Form>
       </SideBar>
     </div>
