@@ -21,7 +21,6 @@ const CreateEvent = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [status,setStatus] = useState(false);
   const handleCancel = () => setPreviewOpen(false);
   const navigate = useNavigate();
 
@@ -68,7 +67,7 @@ const CreateEvent = () => {
 
        
       // Step 1: Create the event without the image
-      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/create-event", {
+      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/update-event", {
         EventName: values.eventName,
         EventLocation: values.eventLocation,
         EventDescription: values.eventDescription,
@@ -76,9 +75,7 @@ const CreateEvent = () => {
       });
   
       // Log the event creation response
-    console.log("Uploaded another details" , eventResponse);
-
-    console.log(eventResponse.data.success);
+      console.log("Uploaded another details" , eventResponse);
 
 
       // Step 2: Upload the cover image
@@ -89,7 +86,7 @@ const CreateEvent = () => {
       console.log([...formData]);
   
       const coverImageRes = await axios.post(
-        "http://localhost:8080/api/v1/coverUpload/cover-image-upload",
+        "http://localhost:8080/api/v1/coverUpload/update-cover-image-upload",
         formData,
         {
           headers: {
@@ -100,10 +97,6 @@ const CreateEvent = () => {
   
       // Log the cover image upload response
       console.log("Uploaded image details " , coverImageRes);
-
-      if(eventResponse.data.success || coverImageRes.data.success){
-         setStatus(true)
-      }
 
   
       // Display success message
@@ -116,11 +109,6 @@ const CreateEvent = () => {
       message.error("Event Creation Failed");
     }
   };
-
-
-  const handleUpdate = async(values)=>{
-     console.log(values);
-  }
 
   const { TextArea } = Input;
 
@@ -237,21 +225,11 @@ const CreateEvent = () => {
             </Modal>
           </Form.Item>
           {/* Submit button */}
-          {
-            status ? 
-            <Form.Item>
+          <Form.Item>
             <Button type="primary" htmlType="submit">
               Update
             </Button>
           </Form.Item>
-           :
-
-           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-          }
         </Form>
       </SideBar>
     </div>

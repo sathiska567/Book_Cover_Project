@@ -48,6 +48,7 @@ const coverImageUploadController = async (req, res) => {
 // GET cover image
 const getCoverImageUploadController = async(req,res)=>{
    try {
+
      const imgData = await coverImageGalleryModel.find({});
       res.status(200).send({
         success:true,
@@ -62,4 +63,31 @@ const getCoverImageUploadController = async(req,res)=>{
    }
 }
 
-module.exports = { coverImageUploadController,getCoverImageUploadController };
+
+const UpdateCoverImageUploadController = async(req,res)=>{
+
+  try {
+    
+    const id = "65a0f4172dbf1ae3088c8610"
+    const result = await cloudinary.uploader.upload(req.files.image.path);
+    const updatedImg = await coverImageGalleryModel.findByIdAndUpdate(id,{coverimgUrl: result.secure_url,publicId: result.public_id},{new:true})
+
+    console.log(updatedImg);
+    res.status(200).send({
+      success:true,
+      message:"Cover Image Updated",
+      updatedImg
+    })
+
+    
+  } catch (error) {
+    res.status(400).send({
+      success:false,
+      message:"Cover Image Uploading has some error",
+    })
+  }
+
+
+}
+
+module.exports = { coverImageUploadController,getCoverImageUploadController,UpdateCoverImageUploadController };

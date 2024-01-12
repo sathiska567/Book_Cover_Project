@@ -50,10 +50,41 @@ const getCreateEventController = async(req,res)=>{
     try {
       const data = await createEventDetailsModel.find({});
       
+      res.status(200).send({
+        success:true,
+        message:"Event Details Fetched",
+        data
+      });
       
     } catch (error) {
-      
+      res.status(400).send({
+        success:false,
+        message:"Event Details Fetched have an error",
+      });
     }
 }
 
-module.exports = { createEventController,getCreateEventController };
+
+const updateEventController = async(req,res)=>{
+  try {
+    const id = "65a0f40f2dbf1ae3088c860e"
+    console.log(req.body);
+    const updatedEvent = await createEventDetailsModel.findByIdAndUpdate(id, req.body, { new: true });
+    console.log(updatedEvent);
+    
+    res.status(200).send({
+      success:true,
+      message:"Event Details Updated",
+      updatedEvent
+    })
+
+  } catch (error) {
+    res.status(400).send({
+      success:true,
+      message:"Event Details Update have error",
+      error
+    })
+  }
+}
+
+module.exports = { createEventController,getCreateEventController,updateEventController };
