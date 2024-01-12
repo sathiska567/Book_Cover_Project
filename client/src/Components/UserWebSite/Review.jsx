@@ -200,7 +200,7 @@ const Review = () => {
           />
         </div>
         {reviewData.map((data)=>(
-          <p>Name : {data.userName} <br /> Review : {data.review}</p>
+          <p><hr /><b>Name</b> : {data.userName} <br /><br /> <b>Review</b> : {data.review} <hr /></p>
        ))}
       </div>
       

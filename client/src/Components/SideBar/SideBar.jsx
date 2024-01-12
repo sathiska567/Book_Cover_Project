@@ -179,7 +179,7 @@ const SideBar = ({ children }) => {
               <a href="/comments">
                 <Space size={24}>
                   {/* Notification badge */}
-                  <Badge count={3}>
+                  <Badge count={0}>
                     <Avatar
                       className="avatar"
                       shape="square"
