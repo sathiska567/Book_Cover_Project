@@ -61,23 +61,6 @@ const Review = () => {
   };
 
 
-  const getReview = async()=>{
-    try {
-      const response = await axios.get("http://localhost:8080/api/v1/review/get-review")
-      console.log(response.data.review);
-      // setData(response.data.review)
-
-    } catch (error) {
-      message.error("Something went wrong")
-    }
-  }
-
-  useEffect(()=>{
-    getReview();
-  })
-
-
-
   return (
     <div className={reviewStyles.reviewContainer}>
       <div className={reviewStyles.reviewButton}>

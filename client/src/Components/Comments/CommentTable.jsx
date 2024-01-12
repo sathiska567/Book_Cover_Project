@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 // Import necessary libraries and components
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CommentTable.css";
 import SideBar from "../SideBar/SideBar";
 import { Space, Table, Button, Input, DatePicker } from "antd";
 import moment from "moment";
+import axios from "axios";
 
 const { RangePicker } = DatePicker;
 // Define the structure of the table
@@ -116,6 +117,9 @@ const CommentTable = () => {
   // New state for storing selected date range
   const [dateRange, setDateRange] = useState([]);
 
+  // Get review
+  const [data,setData] = useState([])
+
   // Filter data based on search value, whether to show today's comments, and selected date range
   // Function to handle date range change
   const handleDateRangeChange = (dates) => {
@@ -146,6 +150,24 @@ const CommentTable = () => {
   const handleTodayClick = () => {
     setShowToday(!showToday);
   };
+
+
+  const getReview = async()=>{
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/review/get-review")
+      console.log(response.data.review);
+      // setData(response.data.review)
+
+    } catch (error) {
+      message.error("Something went wrong")
+    }
+  }
+
+  useEffect(()=>{
+    getReview();
+  })
+
+
 
   // Render the component
   return (
