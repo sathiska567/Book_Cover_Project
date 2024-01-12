@@ -35,11 +35,11 @@ const requestController = async(req,res)=>{
 
 const getRequestController= async(req,res)=>{
 try {
-    const request = await requestModel.find({});
+    const requestData = await requestModel.find({});
     res.status(200).send({
         success:true,
         message:"Request has been fetched successfully",
-        request
+        requestData
     })
 
   } catch (error) {

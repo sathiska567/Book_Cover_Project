@@ -4,14 +4,17 @@ import LoginStyles from "./Login.module.css";
 import { Button, Form, Input, message } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email,setEmail] = useState("")
   const [password, setPassword] = useState("");
+  const [emailValue,setEmailValue] = useState("")
+  const [isAdminValue,setIsAdminValue] = useState(false)
   const navigate = useNavigate();
+  const location = useLocation([]);
 
   // State to manage password visibility
   const [visible, setVisible] = useState(false);
@@ -35,15 +38,17 @@ const Login = () => {
             if(response.data.success){
             const token = response.data.token;
             localStorage.setItem("token", token);
+
             console.log(response.data.admin.isAdmin);
-            console.log(response.data.admin.isAdmin);
+            setIsAdminValue(response.data.admin.isAdmin)
 
             if(response.data.admin.isAdmin){
               navigate("/createEvent")
             }
             else{
               // message.success("/user")
-              navigate("/user")
+              localStorage.clear();
+              navigate("/user",{state:{isAdminValue:isAdminValue}})
             }
 
             message.success("Login Successfull");
@@ -94,6 +99,7 @@ const Login = () => {
                     message: "Please input your email!",
                   },
                 ]}
+                onChange = {(e)=>setEmailValue(e.target.value)}
               >
                 <Input
                   type="email"

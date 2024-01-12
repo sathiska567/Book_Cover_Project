@@ -56,6 +56,15 @@ const Gallery = () => {
     speed: 600,
   };
 
+
+  const galleryAllImages = async()=>{
+      try {
+        
+      } catch (error) {
+        
+      }
+  }
+
   return (
     <div
       style={{

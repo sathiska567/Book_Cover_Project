@@ -19,6 +19,8 @@ import { SocialIcon } from "react-social-icons";
 import "react-social-icons/vimeo";
 import "react-social-icons/meetup";
 import axios from "axios";
+import { useLocale } from "antd/es/locale";
+import { useLocation } from "react-router-dom";
 
 const UserWebSite = () => {
 
@@ -28,6 +30,11 @@ const UserWebSite = () => {
   const [eventDate,setEventDate] = useState("")
   const [eventDescription,setEventDescription] = useState("")
   const [location,setLocation] = useState("")
+  const [userState,setUserState] = useState("")
+
+  const LocationValue = useLocation([])
+
+  console.log(LocationValue);
 
   const getCoverImage = async()=>{
       try {
@@ -49,6 +56,7 @@ const UserWebSite = () => {
       setEventDescription(response.data.data[0].EventDescription)
       setEventDate(response.data.data[0].EventDate)
       setLocation(response.data.data[0].EventLocation)
+      setUserState(LocationValue.state.isAdminValue)
 
     } catch (error) {
       message.error("Event data fetched have an error")
