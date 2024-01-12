@@ -7,6 +7,8 @@ import img2 from "../../assets/images/b.jpg";
 import img3 from "../../assets/images/c.jpg";
 import img4 from "../../assets/images/d.jpg";
 import img5 from "../../assets/images/e.jpg";
+import axios from 'axios';
+import { message } from 'antd';
 
 const Gallery = () => {
 
@@ -59,11 +61,17 @@ const Gallery = () => {
 
   const galleryAllImages = async()=>{
       try {
+        const response = await axios.get("http://localhost:8080/api/v1/upload/get-images")
+        console.log(response);
         
       } catch (error) {
-        
+        message.error("Erro Found in fetching images")
       }
   }
+
+  useEffect(()=>{
+    galleryAllImages()
+  },[])
 
   return (
     <div
