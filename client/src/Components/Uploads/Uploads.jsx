@@ -98,9 +98,6 @@ const Uploads = () => {
     }
   };
 
-  const handleVideoSubmit = async()=>{
-    
-  }
 
   return (
     <div>
@@ -146,7 +143,7 @@ const Uploads = () => {
             Submit Images
           </Button>
           {/* Submit button */}
-          <Form.Item>
+          {/* <Form.Item>
             <hr />
             <Form.Item
               style={{ marginTop: "20px" }}
@@ -188,7 +185,7 @@ const Uploads = () => {
             <Button type="primary" htmlType="submit" onClick={handleVideoSubmit}>
               Submit Videos
             </Button>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </SideBar>
     </div>
