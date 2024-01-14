@@ -153,9 +153,6 @@ const Gallery = () => {
          </div>
         ))} */}
 
-
-
-
       </Swiper>
 
 

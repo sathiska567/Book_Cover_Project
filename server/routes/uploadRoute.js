@@ -1,5 +1,5 @@
 const express = require("express");
-const { uploadImageController,getUploadImageController } = require("../controller/uploadController");
+const { getUploadImageController,uploadImageController} = require("../controller/uploadController");
 
 const router = express.Router();
 const expressFormidable = require("express-formidable")

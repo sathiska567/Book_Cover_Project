@@ -83,7 +83,7 @@ const Uploads = () => {
       console.log([...formData]);
 
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/upload/upload-image-gallery",
+        "http://localhost:8080/api/v1/upload/update-image-gallery",
         formData
       );
 

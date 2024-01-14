@@ -100,10 +100,12 @@ const RequestTable = () => {
 
   const requestData = async () => {
     const requestData = await axios.get("http://localhost:8080/api/v1/request/all-request")
+ 
+    console.log(requestData);
 
-    if (requestData.data.success) {
-      console.log(requestData.data.request);
-      setRequestApplicationData(requestData.data.request)
+  if (requestData.data.success) {
+      console.log(requestData.data.requestData);
+      setRequestApplicationData(requestData.data.requestData)
     }
   }
 
