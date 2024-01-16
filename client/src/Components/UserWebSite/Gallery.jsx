@@ -2,16 +2,21 @@ import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import "swiper/css/swiper.css";
 import galleryStyles from "./Gallery.module.css";
-import img1 from "../../assets/images/a.jpg";
-import img2 from "../../assets/images/b.jpg";
-import img3 from "../../assets/images/c.jpg";
-import img4 from "../../assets/images/d.jpg";
-import img5 from "../../assets/images/e.jpg";
 import axios from 'axios';
 import { message } from 'antd';
-
+import  baseurl  from "../../../baseurl/baseurl.js";
 const Gallery = () => {
 
+  const img1 =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209633/wmrpwqsyh0tby1nvjyde.jpg ";
+  const img2 =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209631/iue7zuhml93gleyztkui.jpg ";
+  const img3 =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209618/u80sgvbskhhhaisn93sp.jpg ";
+  const img4 =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209610/neiz7lmyqwzqaznrxnfi.jpg ";
+  const img5 =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705421282/zg5fsspyoffoopryup7a.jpg ";
   /* To make the gallery responsive, 
   we need to use the window width to determine how many slides to show. */
 
@@ -63,7 +68,7 @@ const Gallery = () => {
 
   const galleryAllImages = async()=>{
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/upload/get-images")
+        const response = await axios.get(`${baseurl}/api/v1/upload/get-images`);
         console.log(response.data.images);
         setGalleryImages(response.data.images)
 

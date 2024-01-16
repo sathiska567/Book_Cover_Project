@@ -21,7 +21,7 @@ import "react-social-icons/meetup";
 import axios from "axios";
 import { useLocale } from "antd/es/locale";
 import { useLocation } from "react-router-dom";
-
+import  baseurl  from "../../../baseurl/baseurl.js";
 const UserWebSite = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -31,14 +31,16 @@ const UserWebSite = () => {
   const [eventDescription,setEventDescription] = useState("")
   const [location,setLocation] = useState("")
   const [userState,setUserState] = useState("")
-
   const LocationValue = useLocation([])
-
+  const logo =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
   console.log(LocationValue);
 
   const getCoverImage = async()=>{
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/coverUpload/get-cover-image")
+        const response = await axios.get(
+          `${baseurl}/api/v1/coverUpload/get-cover-image`
+        );
         console.log(response.data.imgData[0].coverimgUrl);
         setImgUrl(response.data.imgData[0].coverimgUrl)
         
@@ -49,12 +51,20 @@ const UserWebSite = () => {
 
   const getEventDetails = async()=>{
     try {
-
-      const response = await axios.get("http://localhost:8080/api/v1/event/get-create-event")
+      const response = await axios.get(
+        `${baseurl}/api/v1/event/get-create-event`
+      );
       console.log(response.data.data[0]);
       setEventName(response.data.data[0].EventName)
       setEventDescription(response.data.data[0].EventDescription)
-      setEventDate(response.data.data[0].EventDate)
+      let date = new Date(response.data.data[0].EventDate);
+      let formattedDate =
+        date.getFullYear() +
+        "-" +
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + date.getDate()).slice(-2);
+      setEventDate(formattedDate);
       setLocation(response.data.data[0].EventLocation)
       // setUserState(LocationValue.state.isAdminValue)
 
@@ -76,7 +86,7 @@ const UserWebSite = () => {
           <Container>
             <Navbar.Brand href="#home">
               <img
-                src="./e.png"
+                src={logo}
                 alt="logo"
                 className="logo"
                 style={{ width: "80px", height: "80px" }}
@@ -179,9 +189,7 @@ const UserWebSite = () => {
             <img src={imgUrl} alt="event" className={userStyles.EventImage} />
             <div className={userStyles.EventText}>
               <h1 className={userStyles.eventName}>{eventName}</h1>
-              <p className={userStyles.eventDescription}>
-                {eventDescription}
-              </p>
+              <p className={userStyles.eventDescription}>{eventDescription}</p>
               <h5 className={userStyles.eventDate}>{eventDate}</h5>
               <h1 className={userStyles.eventDate}>
                 {/* 07 <sup>th</sup>{" "} */}
@@ -239,7 +247,7 @@ const UserWebSite = () => {
                 width: "100px",
                 height: "100px",
               }}
-              src="./e.png"
+              src={logo}
               alt="logo"
             />
           </div>

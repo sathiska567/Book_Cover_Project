@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import  baseurl  from '../../../baseurl/baseurl.js';
+
 
 export default function Sample() {
   const [file,setFile] = useState();
@@ -14,7 +16,11 @@ const handleUpload = async (e) => {
   console.log([...formData]);
 
   try {
-    const {data}  = await axios.post("http://localhost:8080/api/v1/upload/upload-image", formData);
+    const { data } = await axios.post(
+      `${baseurl}/api/v1/upload/upload-image`,
+
+      formData
+    );
     
 
     console.log(data);

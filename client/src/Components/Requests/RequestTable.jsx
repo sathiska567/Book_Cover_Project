@@ -5,6 +5,9 @@ import SideBar from "../SideBar/SideBar";
 import { Space, Table, Button, message } from "antd";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import  baseurl  from "../../../baseurl/baseurl.js";
+
+
 
 /*------------------Ant Design Table - Start------------------------*/
 // const columns = [
@@ -99,11 +102,13 @@ const RequestTable = () => {
 
 
   const requestData = async () => {
-    const requestData = await axios.get("http://localhost:8080/api/v1/request/all-request")
+    const requestData = await axios.get(
+      `${baseurl}/api/v1/request/all-request`
+    );
 
     if (requestData.data.success) {
-      console.log(requestData.data.request);
-      setRequestApplicationData(requestData.data.request)
+      console.log(requestData.data.requestData);
+      setRequestApplicationData(requestData.data.requestData);
     }
   }
 
@@ -111,7 +116,10 @@ const RequestTable = () => {
      try {
     //  console.log(record._id);
      const deletedDataId = record._id
-     const response = await axios.post("http://localhost:8080/api/v1/delete/delete-request",{id:deletedDataId})
+     const response = await axios.post(
+       `${baseurl}/api/v1/delete/delete-request`,
+       { id: deletedDataId }
+     );
     
       if(response.data.success){
            message.success("Deleted Successfull")

@@ -1,5 +1,5 @@
 .reviewContainer {
-  width: 90vw;
+  width: 95vw;
   margin: 0 auto;
   margin-top: 5vh;
   height: 78vh !important;
@@ -21,15 +21,18 @@
   width: 100%;
   padding-right: 10px;
 }
+.reviewTableMobile {
+  display: none;
+}
 
-.rewForm {
-  height: 60vh;
-  overflow: auto !important;
+.authorReply {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 50px;
 }
 
 .ant-empty-normal {
   display: none;
-  height: 60vh;
   overflow: auto !important;
 }
 
@@ -50,14 +53,47 @@
   .reviewContainer {
     flex-direction: column;
     width: 95vw;
-    margin: 0 auto;
-    margin-top: 5vh;
-    height: 70vh !important;
+    height: 82vh !important;
     border: 2px solid #ccc;
     border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    padding: 0px !important;
-    padding-top: 25px !important;
+    
   }
+
+  .reviewTable {
+    display: none;
+  }
+
+  .reviewTableMobile {
+    display: block;
+    width : 100vw !important;
+    height : 60vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 0 !important;
+  }
+
+   .reviewTableMobile .authorReply {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      margin-left: 0px !important;
+  }
+
+  .reviewTableMobile .avatar {
+    display: none;
+  }
+
+  .reviewTableMobile .inputField {
+    margin-left : auto;
+    margin-right: auto;
+  }
+
+.reviewTableMobile .replyItem {
+  width : 70vw !important;
+}
+
+.description {
+  width: 65vw !important;
+}
+
+
 }

@@ -5,8 +5,11 @@ import { Button, Form, message } from "antd";
 import { InputOTP } from "antd-input-otp";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import  baseurl  from "../../../baseurl/baseurl.js";
 
 const EnterOTP = () => {
+  const logo =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
   const [form] = Form.useForm();
   const location = useLocation([]);
   const navigate = useNavigate();
@@ -21,7 +24,10 @@ const EnterOTP = () => {
            console.log(result);
            const email = location.state.email;
 
-           const response = await axios.post("http://localhost:8080/api/v1/validate/valide-otp",{email:email , otp:result})
+           const response = await axios.post(
+             `${baseurl}/api/v1/validate/valide-otp`,
+             { email: email, otp: result }
+           );
            console.log(response);
 
            if(response.data.success){
@@ -40,7 +46,7 @@ const EnterOTP = () => {
         <div className={EnterOTPStyles.FormContainer}>
           <div className={EnterOTPStyles.EnterOTPFormHeader}>
             <img
-              src="e.png"
+              src={logo}
               alt="Profile"
               className={EnterOTPStyles.profileIcon}
             />
@@ -69,7 +75,7 @@ const EnterOTP = () => {
               onFinish={onFinish}
             >
               <Form.Item name="otp">
-                <InputOTP autoSubmit={form} inputType="numeric" length={4}/>
+                <InputOTP autoSubmit={form} inputType="numeric" length={4} />
               </Form.Item>
 
               <Button

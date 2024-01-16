@@ -4,8 +4,9 @@ import ForgetPasswordStyles from "./ForgotPassword.module.css";
 import { Button, Form, Input, message } from "antd";
 import axios  from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-
+import baseurl  from "../../../baseurl/baseurl.js";
+  const logo =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
 const ForgotPassword = () => {
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,7 +29,10 @@ const ForgotPassword = () => {
 
   const handleSendEmail = async()=>{
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/forgottenPassword/sendOTP",{email:otpSendEmail})
+      const response = await axios.post(
+        `${baseurl}/api/v1/forgottenPassword/sendOTP`,
+        { email: otpSendEmail }
+      );
       console.log(response);
   
        if(response.data.success){
@@ -46,7 +50,7 @@ const ForgotPassword = () => {
         <div className={ForgetPasswordStyles.FormContainer}>
           <div className={ForgetPasswordStyles.ForgetPasswordFormHeader}>
             <img
-              src="e.png"
+              src={logo}
               alt="Profile"
               className={ForgetPasswordStyles.profileIcon}
             />

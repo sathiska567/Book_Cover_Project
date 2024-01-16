@@ -6,6 +6,7 @@ import SideBar from "../SideBar/SideBar";
 import { Space, Table, Button, Input, DatePicker, message } from "antd";
 import moment from "moment";
 import axios from "axios";
+import  baseurl from "../../../baseurl/baseurl.js";
 
 const { RangePicker } = DatePicker;
 // Define the structure of the table
@@ -155,7 +156,7 @@ const CommentTable = () => {
 
   const getComments = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/review/get-review");
+      const response = await axios.get(`${baseurl}/api/v1/review/get-review`);
       console.log(response.data.review);
 
       if (response.data.success) {
@@ -173,7 +174,10 @@ const CommentTable = () => {
     try {
        console.log(record._id);
       const deletedDataId = record._id
-      const response = await axios.post("http://localhost:8080/api/v1/delete/delete-review", { id: deletedDataId })
+      const response = await axios.post(
+        `${baseurl}/api/v1/delete/delete-review`,
+        { id: deletedDataId }
+      );
       console.log(response);
       if (response.data.success) {
         message.success("Deleted Successfull")

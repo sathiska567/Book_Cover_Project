@@ -181,7 +181,7 @@ body {
 .EventImage {
   position: relative;
   width: 100vw;
-  height: 85vh;
+  height: 90vh;
 }
 .EventImage::after {
   content: "";
@@ -271,7 +271,7 @@ body {
 /*--------------------Gallery Styles Mobile-start--------------*/
 @media (max-width: 767px) {
   .galleryTitle {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin: 30px;
   }
@@ -297,8 +297,14 @@ body {
 /*--------------------Request Styles Desktop-end--------------*/
 /*--------------------Request Styles Mobile-start--------------*/
 @media (max-width: 767px) {
+  
+  .RequestContainer {
+    width: 100vw;
+    height: 100vh;
+  }
+  
   .RequestTitle {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin: 30px;
   }
@@ -325,7 +331,7 @@ body {
 /*--------------------Youtube Styles Mobile-start--------------*/
 @media (max-width: 767px) {
   .YoutubeTitle {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin: 30px;
   }
@@ -355,10 +361,12 @@ body {
   .AuthorContainer {
     width: 100vw;
     height: 166vh;
+    padding-bottom: 5vh !important;
+
   }
 
   .AuthorTitle {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin: 30px;
   }
@@ -366,8 +374,8 @@ body {
 /*--------------------YouAuthortube Styles Mobile-end--------------*/
 /*--------------------Review Styles Desktop-start--------------*/
 .ReviewContainer {
-  width: 100vw;
-  height: 105vh;
+  width: 100vw !important;
+  height: 100vh;
 }
 
 .ReviewTitle {
@@ -386,11 +394,11 @@ body {
 @media (max-width: 767px) {
   .ReviewContainer {
     width: 100vw;
-    height: 166vh;
+    height: 100vh !important;
   }
 
   .ReviewTitle {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin: 30px;
   }
@@ -464,15 +472,15 @@ body {
     display: none;
   }
   .mobileFooterContainer {
-    border-radius: 84% 100% 0% 0% / 29% 30% 76% 10%;
     left: 0;
     bottom: 0;
     width: 100vw;
-    height: 60vh;
+    height: 55vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #16151a;
+    margin-top: 2vh !important;
   }
 
   .FooterContainer {

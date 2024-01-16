@@ -1,6 +1,8 @@
 import React from 'react'
 import authorStyles from "./Author.module.css";
 const Author = () => {
+  const authorImage =
+    "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705072908/kxa6iks0yeamjmxt25c4.jpg";
     return (
       <div className={authorStyles.authorContainer}>
         <div className={authorStyles.authorDescription}>
@@ -46,7 +48,7 @@ const Author = () => {
               background: "white",
               boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
             }}
-            src="/public/d.jpg"
+            src={authorImage}
             alt="request"
           />
         </div>

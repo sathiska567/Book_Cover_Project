@@ -15,6 +15,7 @@ import {
 import { Layout, Menu, Button, theme, Space, Badge, Avatar, message } from "antd";
 import axios from "axios";
 import { adminMenu, userMenu } from "../../Data/data";
+import  baseurl  from "../../../baseurl/baseurl.js";
 
 /*----------------------For side navigation-start--------------------------*/
 const { Header, Sider, Content } = Layout;
@@ -66,7 +67,8 @@ const SideBar = ({ children }) => {
   const currentUserData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/currentUser/getCurrentUser",
+        `${baseurl}/api/v1/currentUser/getCurrentUser`,
+
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -90,55 +92,102 @@ const SideBar = ({ children }) => {
   const MenuList = isAdmin ? adminMenu : userMenu
   console.log(Menu);
   return (
-  <>
-   
-   <Layout
-      style={{
-        width: "100vw",
-        height: "100vh",
-      }}
-    >
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <div style={{ color: "white" }} className="welcome">
-          Hi{!collapsed && <span>, {userName}</span>}
-        </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          style={{
-            background: "#001529",
-            fontSize: "16px",
-          }}
-          selectedKeys={[keyMap[location.pathname]]}
-        >
-          <Menu.Item key="1" icon={<EditOutlined />}>
-            <Link to="/createEvent"> Create Event</Link>
-          </Menu.Item>
-          <Menu.Item key="2" icon={<UploadOutlined />}>
-            <Link to="/uploads"> Uploads</Link>
-          </Menu.Item>
-          <Menu.Item key="3" icon={<PullRequestOutlined />}>
-            <Link to="/requests"> Requests</Link>
-          </Menu.Item>
-          <Menu.Item key="4" icon={<CommentOutlined />}>
-            <Link to="/comments"> Comments</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="5"
-            className="signout"
-            icon={<LogoutOutlined />}
+    <>
+      <Layout
+        style={{
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="demo-logo-vertical" />
+          <div style={{ color: "white" }} className="welcome">
+            Hi{!collapsed && <span>, {userName}</span>}
+          </div>
+          <Menu
+            theme="dark"
+            mode="inline"
             style={{
-              position: "absolute",
-              bottom: 0,
-              marginLeft: "3px",
-              marginRight: "5px",
+              background: "#001529",
+              fontSize: "16px",
             }}
+            selectedKeys={[keyMap[location.pathname]]}
           >
-            <Link to="/" onClick={handleSignOut}> Sign out</Link>
-          </Menu.Item>
- 
-       {/* {MenuList.map((menu)=>(
+            <Menu.Item key="1" icon={<EditOutlined />}>
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/createEvent"
+              >
+                {" "}
+                Create Event
+              </Link>
+            </Menu.Item>
+            <Menu.Item
+              style={{
+                textDecoration: "none",
+              }}
+              key="2"
+              icon={<UploadOutlined />}
+            >
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/uploads"
+              >
+                {" "}
+                Uploads
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<PullRequestOutlined />}>
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/requests"
+              >
+                {" "}
+                Requests
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<CommentOutlined />}>
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/comments"
+              >
+                {" "}
+                Comments
+              </Link>
+            </Menu.Item>
+            <Menu.Item
+              key="5"
+              className="signout"
+              icon={<LogoutOutlined />}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                marginLeft: "3px",
+                marginRight: "5px",
+                textDecoration: "none",
+              }}
+            >
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/"
+                onClick={handleSignOut}
+              >
+                {" "}
+                Sign out
+              </Link>
+            </Menu.Item>
+
+            {/* {MenuList.map((menu)=>(
 
           <Menu.Item key={menu.path} icon={<UploadOutlined />}>
           <Link to={menu.path}> {menu.name}</Link>
@@ -146,97 +195,96 @@ const SideBar = ({ children }) => {
 
        ))} */}
 
-        <Menu.Item
-            key="5"
-            className="signout"
-            icon={<LogoutOutlined />}
+            <Menu.Item
+              key="5"
+              className="signout"
+              icon={<LogoutOutlined />}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                marginLeft: "3px",
+                marginRight: "5px",
+              }}
+            >
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to="/"
+                onClick={handleSignOut}
+              >
+                {" "}
+                Sign out
+              </Link>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header
             style={{
-              position: "absolute",
-              bottom: 0,
-              marginLeft: "3px",
-              marginRight: "5px",
+              padding: 0,
+              background: "#001529",
             }}
           >
-            <Link to="/" onClick={handleSignOut}> Sign out</Link>
-          </Menu.Item>
-
-
-        </Menu>
-
-     
-      </Sider>
-      <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: "#001529",
-          }}
-        >
-          <div className="HeaderButtonSet">
-            {
-              isAdmin ? 
+            <div className="HeaderButtonSet">
+              {isAdmin ? (
+                <span style={{ color: "white" }} className="notificaiton">
+                  <a href="/comments">
+                    <Space size={24}>
+                      {/* Notification badge */}
+                      <Badge count={0}>
+                        <Avatar
+                          className="avatar"
+                          shape="square"
+                          icon={<BellOutlined />}
+                        />
+                      </Badge>
+                    </Space>
+                  </a>
+                </span>
+              ) : (
+                ""
+              )}
               <span style={{ color: "white" }} className="notificaiton">
-              <a href="/comments">
-                <Space size={24}>
-                  {/* Notification badge */}
-                  <Badge count={0}>
-                    <Avatar
-                      className="avatar"
-                      shape="square"
-                      icon={<BellOutlined />}
-                    />
-                  </Badge>
-                </Space>
-              </a>
-            </span>
+                <a href="/login">
+                  <Space size={24}>
+                    {/* Notification badge */}
+                    <Avatar className="avatar" icon={<LogoutOutlined />} />
+                  </Space>
+                </a>
+              </span>
+            </div>
 
-              :
-              
-              ""
-            }
-            <span style={{ color: "white" }} className="notificaiton">
-              <a href="/login">
-                <Space size={24}>
-                  {/* Notification badge */}
-                  <Avatar className="avatar" icon={<LogoutOutlined />} />
-                </Space>
-              </a>
-            </span>
+            <Button
+              type="text"
+              className="trigger"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+                color: "white",
+              }}
+            />
+          </Header>
+          <div className="titleBar">
+            <h3 className="title">{titleMap[location.pathname]}</h3>
           </div>
-
-          <Button
-            type="text"
-            className="trigger"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+          <Content
             style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-              color: "white",
+              margin: "24px 16px",
+              padding: 24,
+              minHeight: 280,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
             }}
-          />
-        </Header>
-        <div className="titleBar">
-          <h3 className="title">{titleMap[location.pathname]}</h3>
-        </div>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          {children}
-        </Content>
+          >
+            {children}
+          </Content>
+        </Layout>
       </Layout>
-    </Layout> 
-      
-  
-  </>
-    
+    </>
   );
 };
 export default SideBar;

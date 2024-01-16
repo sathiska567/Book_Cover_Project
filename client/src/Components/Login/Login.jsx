@@ -5,8 +5,11 @@ import { Button, Form, Input, message } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import  baseurl  from "../../../baseurl/baseurl.js";
 
 const Login = () => {
+    const logo =
+      "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
   // State to confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email,setEmail] = useState("")
@@ -33,7 +36,11 @@ const Login = () => {
           console.log(email,password);
         
           try {
-            const response = await axios.post("http://localhost:8080/api/v1/loginUser/login",{email:email , password:password})
+            const response = await axios.post(
+              `${baseurl}/api/v1/loginUser/login`,
+
+              { email: email, password: password }
+            );
 
             if(response.data.success){
             const token = response.data.token;
@@ -69,11 +76,7 @@ const Login = () => {
       <div className={LoginStyles.LoginContainer}>
         <div className={LoginStyles.FormContainer}>
           <div className={LoginStyles.LoginFormHeader}>
-            <img
-              src="e.png"
-              alt="Profile"
-              className={LoginStyles.profileIcon}
-            />
+            <img src={logo} alt="Profile" className={LoginStyles.profileIcon} />
           </div>
 
           <div className={LoginStyles.LoginFormTitle}>
@@ -99,7 +102,7 @@ const Login = () => {
                     message: "Please input your email!",
                   },
                 ]}
-                onChange = {(e)=>setEmailValue(e.target.value)}
+                onChange={(e) => setEmailValue(e.target.value)}
               >
                 <Input
                   type="email"

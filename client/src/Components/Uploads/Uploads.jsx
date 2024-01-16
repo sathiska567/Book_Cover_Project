@@ -4,6 +4,7 @@ import { Modal, Upload, Form, Button, message } from "antd";
 import SideBar from "../SideBar/SideBar";
 import "./Uploads.css";
 import axios from "axios";
+import  baseurl  from "../../../baseurl/baseurl.js";
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -83,7 +84,7 @@ const Uploads = () => {
       console.log([...formData]);
 
       const { data } = await axios.post(
-        "http://localhost:8080/api/v1/upload/upload-image-gallery",
+        `${baseurl}/api/v1/upload/upload-image-gallery`,
         formData
       );
 

@@ -50,3 +50,8 @@ body {
   flex-direction: row;
   gap: 20px;
 }
+
+
+Menu Menu.item Link {
+  text-decoration: none;
+}

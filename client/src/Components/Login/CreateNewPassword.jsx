@@ -5,7 +5,7 @@ import { Button, Form, Input, message } from "antd";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import  baseurl  from "../../../baseurl/baseurl.js";
 const CreateNewPassword = () => {
   // Set the maximum number of messages when the component mounts
   useEffect(() => {
@@ -13,6 +13,8 @@ const CreateNewPassword = () => {
       maxCount: 3,
     });
   }, []);
+const logo =
+  "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,7 +38,10 @@ const CreateNewPassword = () => {
      try {
        console.log(location);
        const email = location.state.email;
-       const response = await axios.post("http://localhost:8080/api/v1/reset/change-password",{email:email , password:password})
+       const response = await axios.post(
+         `${baseurl}/api/v1/reset/change-password`,
+         { email: email, password: password }
+       );
        if(response.data.success){
            message.success("Password changed successfully!");
            navigate("/login")
@@ -59,7 +64,7 @@ const CreateNewPassword = () => {
         >
           <div className={CreateNewPasswordStyles.NewPasswordFormHeader}>
             <img
-              src="e.png"
+              src={logo}
               alt="Profile"
               className={CreateNewPasswordStyles.profileIcon}
             />
@@ -173,7 +178,6 @@ const CreateNewPassword = () => {
           className={`${CreateNewPasswordStyles.ImageContainer} ${CreateNewPasswordStyles.hideOnMobile}`}
         >
           <img
-            
             className={CreateNewPasswordStyles.NewPasswordImage}
             src="/c.jpg"
             alt="NewPasswordImage"

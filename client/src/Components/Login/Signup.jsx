@@ -5,9 +5,11 @@ import { Button, Form, Input, message, Popover } from "antd";
 import PasswordStrengthBar from "react-password-strength-bar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import baseurl  from "../../../baseurl/baseurl.js";
 
 const Signup = () => {
+     const logo =
+       "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705209933/m9ke0kict2zuf8zopgke.png ";
 useEffect(() => {
   message.config({
     maxCount: 3,
@@ -40,21 +42,23 @@ const handleSubmit = async()=>{
 
   console.log(password,email,username);
     
-   try {
-    const response = await axios.post("http://localhost:8080/api/v1/registerUser/register",{username:username , email:email ,password:password })
-   console.log(response);
-    
-   if(response.data.success){
-       message.success("User registered successfully!");
-       navigate("/login")
-   }
-   else{
-    message.error("Error registering user!");
-   }
+try {
+  const response = await axios.post(
+    `${baseurl}/api/v1/registerUser/register`,
 
-   } catch (error) {
-     message.error("Error registering user!");
-   }
+    { username: username, email: email, password: password }
+  );
+  console.log(response);
+
+  if (response.data.success) {
+    message.success("User registered successfully!");
+    navigate("/login");
+  } else {
+    message.error("Error registering user!");
+  }
+} catch (error) {
+  message.error("Error registering user!");
+}
 
 
 
@@ -67,7 +71,7 @@ const handleSubmit = async()=>{
         <div className={SignupStyles.FormContainer}>
           <div className={SignupStyles.SignUpFormHeader}>
             <img
-              src="e.png"
+              src={logo}
               alt="Profile"
               className={SignupStyles.profileIcon}
             />

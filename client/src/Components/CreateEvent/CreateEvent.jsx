@@ -4,7 +4,7 @@ import { Form, Input, DatePicker, Upload, Button, Modal, message } from "antd";
 import {PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import  baseurl  from "../../../baseurl/baseurl.js";
 // 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -67,12 +67,15 @@ const CreateEvent = () => {
 
        
       // Step 1: Create the event without the image
-      const eventResponse = await axios.post("http://localhost:8080/api/v1/event/update-event", {
-        EventName: values.eventName,
-        EventLocation: values.eventLocation,
-        EventDescription: values.eventDescription,
-        EventDate: values.eventDate,
-      });
+      const eventResponse = await axios.post(
+        `${baseurl}/api/v1/event/update-event`,
+        {
+          EventName: values.eventName,
+          EventLocation: values.eventLocation,
+          EventDescription: values.eventDescription,
+          EventDate: values.eventDate,
+        }
+      );
   
       // Log the event creation response
       console.log("Uploaded another details" , eventResponse);
@@ -86,7 +89,7 @@ const CreateEvent = () => {
       console.log([...formData]);
   
       const coverImageRes = await axios.post(
-        "http://localhost:8080/api/v1/coverUpload/update-cover-image-upload",
+       `${baseurl}/api/v1/coverUpload/update-cover-image-upload`,
         formData,
         {
           headers: {

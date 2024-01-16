@@ -3,9 +3,13 @@ import requestStyles from './Request.module.css';
 import { Form, Input, Button, message } from "antd";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import  baseurl  from '../../../baseurl/baseurl.js';
 
 
 const Request = () => {
+const requestURL =
+  "https://res.cloudinary.com/dov8hd3v6/image/upload/v1705072899/lr6uqr93cqaujn8no0ti.jpg ";
+
     const [form] = Form.useForm();
     const { TextArea } = Input;
     const [nameOfOrganization, setNameOfOrganization] = useState("");
@@ -21,7 +25,14 @@ const Request = () => {
       console.log(nameOfOrganization,nameOfTheRequest,description);
 
       try {
-        const response = await axios.post("http://localhost:8080/api/v1/request/request",{nameOfOrganization:nameOfOrganization , nameOfTheRequest : nameOfTheRequest , requestDescription:description})
+        const response = await axios.post(
+          `${baseurl}/api/v1/request/request`,
+          {
+            nameOfOrganization: nameOfOrganization,
+            nameOfTheRequest: nameOfTheRequest,
+            requestDescription: description,
+          }
+        );
 
          if(response.data.success){
            message.success("Request Sent Successfully");
@@ -95,7 +106,11 @@ const Request = () => {
               </Form.Item>
               {/* Submit button */}
               <Form.Item>
-                <Button type="primary" htmlType="submit" onClick={handleRequest}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={handleRequest}
+                >
                   Submit
                 </Button>
               </Form.Item>
@@ -110,7 +125,7 @@ const Request = () => {
                 background: "white",
                 boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
               }}
-              src="/public/c.jpg"
+              src={requestURL}
               alt="request"
             />
           </div>
